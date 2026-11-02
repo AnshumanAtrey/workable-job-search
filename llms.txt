@@ -1,0 +1,118 @@
+# Workable Jobs Scraper & API - All Companies, Remote, 24 Hours
+
+> Workable jobs scraper and API for every company on apply.workable.com and jobs.workable.com at once, searched by job title, location, remote, job type and date, newest first.
+
+## Summary
+
+Workable Job Search is an Apify actor that searches every company hiring on Workable at once and returns one row per job, newest first: title, company, every place, remote or not, job type, posting date, company website and links. A search by word, place, work type or job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour; on 2026-11-02 Workable's job board counted 170,374 listings (one per job and place), and the first three quarters of the feed held 79,774 open jobs at 4,792 companies in 181 countries. Named companies are read live from their career pages, and job links are checked live. Full details add the description, requirements and benefits, pay as numbers with its period when the company shows it, the work type, the department and the company's job code. No login and no API key.
+
+Store: https://apify.com/anshumanatrey/workable-job-search
+Source: https://github.com/AnshumanAtrey/workable-job-search
+
+## Key features
+
+- Every company at once, with no list of companies needed: the feed held 99% of the open jobs on 329 hiring career pages checked on 2026-11-02.
+- One keyword is enough; every match comes back sorted by date, not by relevance.
+- One row per job: a job Workable lists once per place comes with all its places.
+- Posting date: the time Workable listed the job (the job page's own day for 95% of 6,000 jobs checked), or with full details the day the job page gives Google.
+- Place filter by city, state, country or region: Germany, EMEA, LatAm, Worldwide.
+- Reads a pasted Google dork such as site:apply.workable.com intext:engineer.
+- Job link check: apply.workable.com and jobs.workable.com links come back open, closed or not found.
+
+## Input keys
+
+- Job titles to find (searchTerms): one per line; a job matches when its title has every word.
+- Where the job is (location): city, state, country or region.
+- Remote or onsite (workType): remote, hybrid or onsite; hybrid and onsite are checked job by job for up to 90 seconds.
+- Posted in the last (postedWithin): 24 hours, 3 days, 7 days, 30 days, any time, or your own period.
+- Number of jobs (maxJobs): 100 by default, 0 for every match.
+- Full details (includeDetails): adds the description, pay as numbers with its period when shown, work type, department, the company's job code, city, region and country.
+- Leave out words (excludeTerms): drops jobs whose title has these words.
+- Job type (employmentType): full-time, part-time, contract, intern or temporary.
+- Match descriptions (searchDescriptions): finds your words in the description too.
+- Only these companies (companies): a name, the account in the address, or a Workable link.
+- Job links to check (jobUrls): checks links instead of searching.
+
+## Pricing
+
+PAY_PER_EVENT model, platform usage included:
+
+- Job: $0.0025 per saved job, and per checked link that is closed or not found
+- Job with details: $0.0035 per saved job with full details on
+- Run start: $0.01 per run at the default 1 GB of memory, one more for each extra GB; it pays for the download of Workable's whole feed, about 128 MB, that a search makes whatever it finds
+
+On paid Apify plans the job prices are 10% less on Scale ($0.00225 and $0.00315) and 20% less on Business and above ($0.002 and $0.0028); the run start stays $0.01.
+
+Typical costs (Free and Starter price):
+
+- 100 newest jobs: $0.26
+- 100 jobs with full details: $0.36
+- 1,000 jobs in one run: $2.51
+
+## When to use
+
+- The user wants jobs from companies on Workable, or a Workable jobs API, an apply.workable.com or jobs.workable.com scraper.
+- The user wants a daily feed of new jobs by title, country, region, remote or job type across every Workable company.
+- The user wants every open job of one company that hires through Workable.
+- The user wants to check whether Workable job links are still open.
+- The user wants a list of companies hiring now, with their websites.
+
+## When NOT to use
+
+- The user needs pay on every row: Workable's feed and job board carry none, and full details give pay only when the company shows it.
+- The user needs hybrid or onsite jobs in bulk: Workable's lists mark only remote jobs, so those are checked one by one.
+- The user needs jobs from a company that is not on Workable: use workday-job-search, greenhouse-jobs-search or a multi-ATS actor.
+
+## Sample input
+
+```json
+{
+  "searchTerms": ["software engineer"],
+  "location": ["Germany", "United States"],
+  "postedWithin": "30 days",
+  "maxJobs": 100
+}
+```
+
+## Sample output (one record)
+
+From a local run of the engine on 2026-11-02, searching every company for software engineer in a copy of three quarters of Workable's feed. TODO_DEPLOYED: the same row as the README's, from the deployed build's example run.
+
+```json
+{
+  "title": "Java Software Engineer - Getting Paid & Open Banking",
+  "company": "Starling",
+  "location": "London, England, United Kingdom",
+  "otherLocations": ["Cardiff, Wales, United Kingdom", "Manchester, England, United Kingdom"],
+  "workType": null,
+  "employmentType": "full-time",
+  "department": null,
+  "salary": null,
+  "postedAt": "2026-10-12T11:20:13+00:00",
+  "jobUrl": "https://apply.workable.com/j/DC314E7FEE",
+  "applyUrl": "https://apply.workable.com/j/DC314E7FEE/apply",
+  "status": "open",
+  "platform": "workable",
+  "companySlug": "starling-bank",
+  "companyWebsite": "http://www.starlingbank.com",
+  "jobId": "DC314E7FEE",
+  "checkedAt": "2026-11-02T20:39:14+00:00"
+}
+```
+
+## Differentiators vs alternatives
+
+- vs fantastic-jobs/career-site-job-listing-api ($0.012 per job, $0.01 start): many more platforms from a stored database; this actor costs less per job and reads Workable's own feed at run time.
+- vs factpipe/ats-jobs-feed and jtpalms/ats-jobs-index ($0.003 per job): multi-ATS indexes with the description in every row; this actor reads every Workable company from Workable's own hourly feed, and gives the description with full details on.
+- vs shahidirfan/Workable-Job-Scraper ($0.001 per job, $0.005 start): cheaper per job through Workable's job board search, which ranks by relevance; this actor returns every match sorted by date, one row per job.
+
+## Documentation
+
+- Apify Store: https://apify.com/anshumanatrey/workable-job-search
+- GitHub repo: https://github.com/AnshumanAtrey/workable-job-search
+- Issues / feedback: GitHub Issues on the above repo
+- License: MIT
+
+## Maintainer
+
+Anshuman Atrey (https://github.com/AnshumanAtrey), who publishes a portfolio of data and OSINT actors on Apify Store. Feature requests and bugs: LinkedIn (https://linkedin.com/in/anshumanatrey, fastest), GitHub issues, or atrey.dev.

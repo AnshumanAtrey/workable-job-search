@@ -1,0 +1,20 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Workable Job Search output",
+    "description": "The jobs found, one row per job in the default dataset (switch between the Jobs and Details views), plus a run summary record.",
+    "type": "object",
+    "properties": {
+        "jobs": {
+            "type": "string",
+            "title": "Jobs found (jobs)",
+            "description": "Every saved job, newest first: title, company, every place, work type, job type, posting date and job link, and with details on the description, pay as numbers when shown and the country. Export as JSON, CSV or Excel.",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        },
+        "summary": {
+            "type": "string",
+            "title": "Run summary (summary)",
+            "description": "The OUTPUT record in the default key-value store: what was read (Workable's feed or the career pages), jobs matched and saved, companies with a match, checked links, notes about how the input was read, and the settings used.",
+            "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+        }
+    }
+}

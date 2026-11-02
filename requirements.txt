@@ -1,0 +1,1 @@
+ats-jobs-engine @ https://github.com/AnshumanAtrey/ats-jobs-engine/archive/refs/tags/v0.4.0.tar.gz  # the search, matching and charging shared by every job actor; it pins apify>=4.1,<5

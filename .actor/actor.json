@@ -1,0 +1,445 @@
+{
+    "actorSpecification": 1,
+    "name": "workable-job-search",
+    "title": "Workable Jobs Scraper & API - All Companies, Remote, 24 Hours",
+    "description": "Workable jobs scraper and API for every company on apply.workable.com and jobs.workable.com at once, searched by job title, location, remote, job type and date, newest first. Reads Workable's own hourly feed of 170,000+ listings live. The site:apply.workable.com dork done at the source.",
+    "version": "1.0",
+    "buildTag": "latest",
+    "categories": [
+        "JOBS",
+        "LEAD_GENERATION",
+        "OPEN_SOURCE"
+    ],
+    "input": "./INPUT_SCHEMA.json",
+    "output": "./output_schema.json",
+    "dockerfile": "../Dockerfile",
+    "readme": "../README.md",
+    "minMemoryMbytes": 512,
+    "maxMemoryMbytes": 4096,
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "title": "Workable jobs",
+            "description": "One row per job, newest first: title, company, every place, work type, job type, department, posting date, links and the company's website; with details on, also the description, pay as numbers when the company shows it, the company's job code and the place as city, region and country. The run summary is the OUTPUT record, not a row.",
+            "fields": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job title (title)",
+                        "description": "The job title as the company wrote it on Workable.",
+                        "example": "Java Software Engineer - Getting Paid & Open Banking"
+                    },
+                    "company": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company name (company)",
+                        "description": "The company, as it names itself on Workable.",
+                        "example": "Starling"
+                    },
+                    "location": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Main location (location)",
+                        "description": "The job's first place, as city, region and country the way Workable stores it.",
+                        "example": "London, England, United Kingdom"
+                    },
+                    "otherLocations": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "title": "Other locations (otherLocations)",
+                        "description": "Every other place the job is posted for. Workable lists a job once per place; here they come together in one row.",
+                        "example": [
+                            "Cardiff, Wales, United Kingdom",
+                            "Manchester, England, United Kingdom"
+                        ],
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "workType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Remote or onsite (workType)",
+                        "description": "remote, hybrid or onsite. Workable's job lists mark only remote jobs (a title or place that says Remote counts too); hybrid and onsite come from each job's own answer, with details on or in a hybrid or onsite search. Empty when Workable did not say.",
+                        "example": "remote"
+                    },
+                    "employmentType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job type (employmentType)",
+                        "description": "full-time, part-time, contract, temporary or intern, as the company set it on Workable; intern is Workable's experience level Internship. Empty when the company set no type or Other.",
+                        "example": "full-time"
+                    },
+                    "department": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Hiring department (department)",
+                        "description": "The department the job is in, from the company's career page or with details on. Workable's feed has none, so a search by word fills it only with details on.",
+                        "example": "Banking"
+                    },
+                    "salary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Pay summary (salary)",
+                        "description": "With details on: the pay the company shows, with its currency and the period Workable states. Empty when the company shows no pay; Workable's feed and job board carry none.",
+                        "example": "USD 65,000 - 80,000 per year"
+                    },
+                    "postedAt": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Posted on (postedAt)",
+                        "description": "When the job was posted, in UTC. A search by word gives the time Workable listed the job on its job board, the job page's own day for 95% of jobs checked; a company's career page and every search row with details give that day itself, the date the job page gives Google, with no time; a checked jobs.workable.com link gives the job board's own time.",
+                        "example": "2026-10-12T11:20:13+00:00"
+                    },
+                    "jobUrl": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job link (jobUrl)",
+                        "description": "The job's page on Workable: apply.workable.com/j/ and its code, or the jobs.workable.com link that was checked.",
+                        "example": "https://apply.workable.com/j/DC314E7FEE"
+                    },
+                    "applyUrl": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Apply link (applyUrl)",
+                        "description": "The link to apply on Workable.",
+                        "example": "https://apply.workable.com/j/DC314E7FEE/apply"
+                    },
+                    "status": {
+                        "type": "string",
+                        "title": "Still open? (status)",
+                        "description": "open for every search result (read live during the run). For a checked link: open, closed (the job is gone) or not found (jobs.workable.com says the job never existed, or the company has no Workable account).",
+                        "example": "open"
+                    },
+                    "platform": {
+                        "type": "string",
+                        "title": "Job platform (platform)",
+                        "description": "The ATS the job came from: always workable here.",
+                        "example": "workable"
+                    },
+                    "companySlug": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Workable account (companySlug)",
+                        "description": "The company's Workable account, the name in its career page address, as in huggingface for apply.workable.com/huggingface. Always set for jobs read from a career page; for jobs from Workable's feed, set when the company's name is on our list once (54.5% of them on 2026-11-02).",
+                        "example": "starling-bank"
+                    },
+                    "companyWebsite": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company website (companyWebsite)",
+                        "description": "The company's website, as Workable's feed or our list of accounts gives it.",
+                        "example": "http://www.starlingbank.com"
+                    },
+                    "jobId": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job ID (jobId)",
+                        "description": "Workable's ID of the job: the 10-character code in its apply.workable.com link, or the job board's own ID for a jobs.workable.com link.",
+                        "example": "DC314E7FEE"
+                    },
+                    "checkedAt": {
+                        "type": "string",
+                        "title": "Checked at (checkedAt)",
+                        "description": "When the run read Workable, in UTC.",
+                        "example": "2026-11-02T20:39:14+00:00"
+                    },
+                    "description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job description (description)",
+                        "description": "With details on: the job description, requirements and benefits as plain text.",
+                        "example": "Be Part of Us:\nInnovation is and will always be the core of SAP Fioneer."
+                    },
+                    "descriptionHtml": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Description as HTML (descriptionHtml)",
+                        "description": "With details on: the job description, requirements and benefits in HTML, as the company wrote them.",
+                        "example": "<p><strong>Be Part of Us: </strong></p><p>Innovation is and will always be the core of SAP Fioneer. </p>"
+                    },
+                    "reference": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Company job code (reference)",
+                        "description": "With details on: the company's own code for the job, such as its requisition number, when it sets one.",
+                        "example": "PE"
+                    },
+                    "salaryMin": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Lowest pay (salaryMin)",
+                        "description": "With details on: the lowest pay as a number. Empty when the company shows no pay.",
+                        "example": 65000
+                    },
+                    "salaryMax": {
+                        "type": [
+                            "number",
+                            "null"
+                        ],
+                        "title": "Highest pay (salaryMax)",
+                        "description": "With details on: the highest pay as a number. Some jobs give one amount.",
+                        "example": 80000
+                    },
+                    "salaryCurrency": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Pay currency (salaryCurrency)",
+                        "description": "With details on: the currency code of the pay.",
+                        "example": "USD"
+                    },
+                    "salaryPeriod": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Pay period (salaryPeriod)",
+                        "description": "With details on: year, month, week, day or hour, as Workable states it with the pay.",
+                        "example": "year"
+                    },
+                    "city": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job city (city)",
+                        "description": "With details on: the city of the job's main place.",
+                        "example": "Pune"
+                    },
+                    "region": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job region or state (region)",
+                        "description": "With details on: the region or state of the job's main place.",
+                        "example": "Maharashtra"
+                    },
+                    "country": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Job country (country)",
+                        "description": "With details on: the country of the job's main place.",
+                        "example": "India"
+                    },
+                    "countryCode": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "title": "Country code (countryCode)",
+                        "description": "With details on: the two-letter country code of the job's main place.",
+                        "example": "IN"
+                    }
+                }
+            },
+            "views": {
+                "jobs": {
+                    "title": "Jobs",
+                    "description": "One row per job: what it is, where, remote or not, the job type and when it was posted, with its link.",
+                    "transformation": {
+                        "fields": [
+                            "title",
+                            "company",
+                            "location",
+                            "workType",
+                            "employmentType",
+                            "postedAt",
+                            "jobUrl",
+                            "status"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "title": {
+                                "label": "Job title (title)",
+                                "format": "text"
+                            },
+                            "company": {
+                                "label": "Company name (company)",
+                                "format": "text"
+                            },
+                            "location": {
+                                "label": "Main location (location)",
+                                "format": "text"
+                            },
+                            "workType": {
+                                "label": "Remote or onsite (workType)",
+                                "format": "text"
+                            },
+                            "employmentType": {
+                                "label": "Job type (employmentType)",
+                                "format": "text"
+                            },
+                            "postedAt": {
+                                "label": "Posted on (postedAt)",
+                                "format": "date"
+                            },
+                            "jobUrl": {
+                                "label": "Job link (jobUrl)",
+                                "format": "link"
+                            },
+                            "status": {
+                                "label": "Still open? (status)",
+                                "format": "text"
+                            }
+                        }
+                    }
+                },
+                "details": {
+                    "title": "Details",
+                    "description": "The description, department, pay as numbers with its period, country and every other field of each job.",
+                    "transformation": {
+                        "fields": [
+                            "title",
+                            "company",
+                            "description",
+                            "employmentType",
+                            "department",
+                            "salary",
+                            "salaryMin",
+                            "salaryMax",
+                            "salaryCurrency",
+                            "salaryPeriod",
+                            "countryCode",
+                            "otherLocations",
+                            "applyUrl",
+                            "companySlug",
+                            "companyWebsite",
+                            "jobId",
+                            "checkedAt"
+                        ]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "title": {
+                                "label": "Job title (title)",
+                                "format": "text"
+                            },
+                            "company": {
+                                "label": "Company name (company)",
+                                "format": "text"
+                            },
+                            "description": {
+                                "label": "Job description (description)",
+                                "format": "text"
+                            },
+                            "employmentType": {
+                                "label": "Job type (employmentType)",
+                                "format": "text"
+                            },
+                            "department": {
+                                "label": "Hiring department (department)",
+                                "format": "text"
+                            },
+                            "salary": {
+                                "label": "Pay summary (salary)",
+                                "format": "text"
+                            },
+                            "salaryMin": {
+                                "label": "Lowest pay (salaryMin)",
+                                "format": "number"
+                            },
+                            "salaryMax": {
+                                "label": "Highest pay (salaryMax)",
+                                "format": "number"
+                            },
+                            "salaryCurrency": {
+                                "label": "Pay currency (salaryCurrency)",
+                                "format": "text"
+                            },
+                            "salaryPeriod": {
+                                "label": "Pay period (salaryPeriod)",
+                                "format": "text"
+                            },
+                            "countryCode": {
+                                "label": "Country code (countryCode)",
+                                "format": "text"
+                            },
+                            "otherLocations": {
+                                "label": "Other locations (otherLocations)",
+                                "format": "array"
+                            },
+                            "applyUrl": {
+                                "label": "Apply link (applyUrl)",
+                                "format": "link"
+                            },
+                            "companySlug": {
+                                "label": "Workable account (companySlug)",
+                                "format": "text"
+                            },
+                            "companyWebsite": {
+                                "label": "Company website (companyWebsite)",
+                                "format": "link"
+                            },
+                            "jobId": {
+                                "label": "Job ID (jobId)",
+                                "format": "text"
+                            },
+                            "checkedAt": {
+                                "label": "Checked at (checkedAt)",
+                                "format": "date"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "keyValueStore": {
+            "actorKeyValueStoreSchemaVersion": 1,
+            "title": "Run summary",
+            "description": "The OUTPUT record: what was read (Workable's feed or the career pages), how many jobs matched and were saved, the checked links, the notes about how the input was read and the settings used.",
+            "collections": {
+                "summary": {
+                    "title": "Run summary (OUTPUT)",
+                    "description": "Status, message, counts for the boards and jobs, checked links, notes and settings.",
+                    "key": "OUTPUT"
+                }
+            }
+        }
+    }
+}

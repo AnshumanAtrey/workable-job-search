@@ -1,0 +1,118 @@
+{
+    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. Every task but the Hugging Face one has a word, place, work type or job type, so it reads Workable's feed of every company; an empty search would read only the biggest career pages. TODO_DEPLOYED: options.memoryMbytes follows the default memory chosen in store.json.",
+    "options": {
+        "build": "latest",
+        "memoryMbytes": 1024,
+        "timeoutSecs": 1800
+    },
+    "tasks": [
+        {
+            "name": "remote-jobs-on-workable",
+            "title": "Find remote jobs at every company on Workable",
+            "description": "Get the newest remote jobs from every company on Workable at once, with the company, every place, job type, posting date and link. Remote is what the company marked on Workable.",
+            "input": {
+                "workType": ["remote"],
+                "maxJobs": 100
+            },
+            "seoTitle": "Remote Jobs on Workable, Every Company at Once",
+            "seoDescription": "Search every company on Workable for remote jobs at once, newest first, with company, places, job type, posting date and link. No login needed.",
+            "inputSchemaFields": ["searchTerms", "location", "workType", "employmentType", "postedWithin", "maxJobs"],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "new-workable-jobs-us-last-24-hours",
+            "title": "Find new Workable jobs in the US from the last 24 hours",
+            "description": "Get every job that companies on Workable listed in the United States in the last day, newest first, with the company, place, job type and link. Schedule it daily for a fresh feed of US jobs.",
+            "input": {
+                "location": ["United States"],
+                "postedWithin": "24 hours",
+                "maxJobs": 100
+            },
+            "seoTitle": "New Workable Jobs in the US, Last 24 Hours",
+            "seoDescription": "Every job listed on Workable in the United States in the last day, newest first, with company, place, job type and link. Run it daily for a fresh feed.",
+            "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "software-engineer-jobs-workable",
+            "title": "Find software engineer jobs at every company on Workable",
+            "description": "Search every company on Workable for software engineer jobs at once, newest first, with the company, every place, remote or not, job type, posting date and link.",
+            "input": {
+                "searchTerms": ["software engineer"],
+                "maxJobs": 100
+            },
+            "seoTitle": "Software Engineer Jobs on Workable, Every Company",
+            "seoDescription": "Every software engineer job on Workable, newest first, with company, places, remote or not and link. One search across every company, no login.",
+            "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "nurse-jobs-usa-workable",
+            "title": "Find nurse jobs in the United States on Workable",
+            "description": "Get the newest nurse jobs in the United States from every company on Workable at once, with the company, place, job type, posting date and link.",
+            "input": {
+                "searchTerms": ["nurse"],
+                "location": ["United States"],
+                "maxJobs": 100
+            },
+            "seoTitle": "Nurse Jobs in the US on Workable, Newest First",
+            "seoDescription": "Newest nurse jobs in the United States from every company hiring on Workable, with company, place, job type, posting date and link. No login.",
+            "inputSchemaFields": ["searchTerms", "location", "employmentType", "postedWithin", "maxJobs"],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "sales-jobs-europe-workable",
+            "title": "Find sales jobs in Europe on Workable",
+            "description": "Get the newest sales and account executive jobs in Europe from every company on Workable, including jobs posted for EMEA and jobs open worldwide, with the company, place and link.",
+            "input": {
+                "searchTerms": ["sales", "account executive"],
+                "location": ["Europe"],
+                "maxJobs": 100
+            },
+            "seoTitle": "Sales Jobs in Europe on Workable",
+            "seoDescription": "Sales and account executive jobs in Europe from every company on Workable, newest first, with company, place, job type and link. No login or API key.",
+            "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "internships-on-workable",
+            "title": "Find internships at every company on Workable",
+            "description": "Get the newest internships from every company on Workable, with the company, place, remote or not, posting date and link. An internship is Workable's experience level Internship.",
+            "input": {
+                "employmentType": ["intern"],
+                "maxJobs": 100
+            },
+            "seoTitle": "Internships on Workable, Every Company at Once",
+            "seoDescription": "Newest internships from every company hiring on Workable, with company, place, remote or not, posting date and link. One search, no login.",
+            "inputSchemaFields": ["searchTerms", "location", "workType", "employmentType", "postedWithin", "maxJobs"],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "workable-jobs-with-pay-and-descriptions",
+            "title": "Get Workable data analyst jobs with pay and descriptions",
+            "description": "Get the newest data analyst jobs on Workable with full details: the description, requirements and benefits as text and HTML, pay as numbers with its period when the company shows it, department, job type and country.",
+            "input": {
+                "searchTerms": ["data analyst"],
+                "includeDetails": true,
+                "maxJobs": 50
+            },
+            "seoTitle": "Workable Jobs With Pay and Descriptions",
+            "seoDescription": "Data analyst jobs on Workable with the full description, pay as numbers when shown, department, job type and country. Clean JSON for a job board or AI.",
+            "inputSchemaFields": ["searchTerms", "location", "postedWithin", "maxJobs", "includeDetails"],
+            "datasetView": "details"
+        },
+        {
+            "name": "hugging-face-jobs-workable",
+            "title": "Get every open Hugging Face job",
+            "description": "Get every open job at Hugging Face, read live from its Workable career page, with the place, remote or not, department, job type, posting date and link.",
+            "input": {
+                "companies": ["Hugging Face"],
+                "maxJobs": 0
+            },
+            "seoTitle": "Hugging Face Jobs API: Every Open Role",
+            "seoDescription": "Every open Hugging Face job, read live from its Workable career page, with place, remote or not, department, job type and link. No login or API key.",
+            "inputSchemaFields": ["searchTerms", "location", "companies", "maxJobs"],
+            "datasetView": "jobs"
+        }
+    ]
+}

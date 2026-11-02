@@ -1,0 +1,174 @@
+{
+    "title": "Workable Job Search",
+    "description": "Type a job title and press Start: you get the newest matching jobs from every company on Workable, from Workable's own feed of its job board. Every other field is optional. Press Start with the form empty for the newest jobs at the biggest companies.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchTerms": {
+            "title": "Job titles to find (searchTerms)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type the job titles or keywords to find, one per line, for example software engineer. A job matches when its title has every word of a line: frontend also finds Front-End. A word searches every company on Workable at once, in Workable's own feed of its job board. Leave it empty for the newest jobs at the biggest companies. A pasted Google dork or Workable link works too.",
+            "placeholderValue": "software engineer",
+            "example": [
+                "software engineer"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "location": {
+            "title": "Where the job is (location)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type where the jobs should be: a city, state, country or region, one per line, for example London, United States, EMEA or LatAm. US, USA and United States all work; a region finds its countries and the jobs posted for it. Worldwide finds the jobs open everywhere. Type Remote here to get remote jobs. Leave it empty for anywhere.",
+            "placeholderValue": "United States",
+            "example": [
+                "United States"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "workType": {
+            "title": "Remote or onsite (workType)",
+            "type": "array",
+            "editor": "select",
+            "description": "Pick remote, hybrid or onsite, or several. Leave it empty for all of them. Workable's job lists mark only remote jobs, so a hybrid or onsite search checks each matching job's own Workable page, newest first, for up to 90 seconds, and finds fewer jobs. Typed words such as wfh work too.",
+            "items": {
+                "type": "string",
+                "enumSuggestedValues": [
+                    "remote",
+                    "hybrid",
+                    "onsite"
+                ],
+                "enumTitles": [
+                    "Remote",
+                    "Hybrid",
+                    "Onsite, in the office (onsite)"
+                ]
+            },
+            "example": [
+                "remote"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "postedWithin": {
+            "title": "Posted in the last (postedWithin)",
+            "type": "string",
+            "editor": "select",
+            "description": "Pick how new the jobs must be: posted in the last 24 hours, 3 days, 7 days or 30 days. Any time, the default, keeps every open job, newest first. You can also type your own period, such as 48 hours or 2 weeks.",
+            "enumSuggestedValues": [
+                "24 hours",
+                "3 days",
+                "7 days",
+                "30 days",
+                "any time"
+            ],
+            "enumTitles": [
+                "24 hours",
+                "3 days",
+                "7 days",
+                "30 days",
+                "any time"
+            ],
+            "example": "24 hours",
+            "default": "any time",
+            "nullable": true
+        },
+        "maxJobs": {
+            "title": "Number of jobs (maxJobs)",
+            "type": "integer",
+            "editor": "number",
+            "unit": "jobs",
+            "description": "Type how many jobs to get, newest first: 100 by default. Type 0 to get every matching job. Each job is one charged row, so this also sets the most a run can cost.",
+            "prefill": 100,
+            "example": 100,
+            "default": 100,
+            "sectionCaption": "How many and how much",
+            "nullable": true
+        },
+        "includeDetails": {
+            "title": "Full details (includeDetails)",
+            "type": "boolean",
+            "editor": "checkbox",
+            "description": "Tick to add the full details of each job: the description, requirements and benefits as text and HTML, the pay as numbers with its currency and period when the company shows it, remote, hybrid or onsite, the department, the company's job code and the place as city, region and country. Workable is asked about each job in turn, 2 calls a second. A job with details costs $3.50 per 1,000 instead of $2.50.",
+            "default": false,
+            "nullable": true
+        },
+        "excludeTerms": {
+            "title": "Leave out words (excludeTerms)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type words that leave a job out when its title has them, one per line, for example senior or manager. Leave it empty to keep every job.",
+            "placeholderValue": "senior",
+            "example": [
+                "senior"
+            ],
+            "default": [],
+            "sectionCaption": "Narrow the search",
+            "nullable": true
+        },
+        "employmentType": {
+            "title": "Job type (employmentType)",
+            "type": "array",
+            "editor": "select",
+            "description": "Pick the job type: full-time, part-time, contract, internship or temporary, or several. Leave it empty for every job type. This is the type the company set on Workable, and an internship is Workable's experience level Internship. About a fifth of jobs set no type, so a job type leaves them out. Typed words such as freelance or temp work too.",
+            "items": {
+                "type": "string",
+                "enumSuggestedValues": [
+                    "full-time",
+                    "part-time",
+                    "contract",
+                    "intern",
+                    "temporary"
+                ],
+                "enumTitles": [
+                    "Full-time",
+                    "Part-time",
+                    "Contract or freelance (contract)",
+                    "Internship (intern)",
+                    "Temporary"
+                ]
+            },
+            "example": [
+                "full-time"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "searchDescriptions": {
+            "title": "Match descriptions (searchDescriptions)",
+            "type": "boolean",
+            "editor": "checkbox",
+            "description": "Tick to match your keywords in the job description too, not only in the title: python then finds every job that asks for Python. Workable's feed carries each description, so a search by word makes no extra calls; named companies are read with their descriptions.",
+            "default": false,
+            "nullable": true
+        },
+        "companies": {
+            "title": "Only these companies (companies)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Type company names to search only them, one per line: a name (Hugging Face), the account in the address (huggingface) or a Workable link (apply.workable.com/huggingface). Their career pages are read live. A company that is not on our list of 2,098 Workable accounts is tried by its name in lower case with hyphens, and its link always works. Leave it empty to search every company.",
+            "placeholderValue": "Hugging Face",
+            "example": [
+                "Hugging Face",
+                "https://apply.workable.com/biffa/"
+            ],
+            "default": [],
+            "nullable": true
+        },
+        "jobUrls": {
+            "title": "Job links to check (jobUrls)",
+            "type": "array",
+            "editor": "stringList",
+            "description": "Paste Workable job links to check whether they are still open, one per line, instead of searching. Each link comes back open with the job, closed, or not found. apply.workable.com, old company.workable.com and jobs.workable.com links all work. On apply.workable.com a closed job and one that never existed answer the same, so both come back closed.",
+            "placeholderValue": "https://apply.workable.com/j/DC314E7FEE",
+            "example": [
+                "https://apply.workable.com/j/DC314E7FEE"
+            ],
+            "default": [],
+            "sectionCaption": "Check job links",
+            "nullable": true
+        }
+    }
+}
