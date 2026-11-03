@@ -38,7 +38,7 @@ Pay per event: $2.50 per 1,000 jobs, or $3.50 per 1,000 with full details, plus 
 | Job with details | $0.0035 | One saved job with full details on |
 | Run start | $0.01 | Once when a run starts at the default 1 GB of memory; Apify counts one more for each extra GB |
 
-On paid Apify plans the job prices are 10% less on Scale ($0.00225 and $0.00315) and 20% less on Business and above ($0.002 and $0.0028); the run start stays $0.01. The Store page shows that Business price, from $2.00 per 1,000 jobs, and leaves the run start out.
+The Store page header, "from $2.00 / 1,000 jobs", is the GOLD price: Apify's Store shows the lowest discount-tier price. FREE and BRONZE (Apify's Free and Starter plans) pay the base price, $0.0025 a job and $0.0035 with details; SILVER (Scale) pays 10% less, $0.00225 and $0.00315; GOLD (Business) and above pay 20% less, $0.002 and $0.0028. The run start, $0.01 at the default 1 GB, is a flat fee on every plan, and the header never shows it.
 
 | Run (Free and Starter price) | Cost |
 |---|---|
@@ -163,11 +163,11 @@ How the time goes: a search by word, place, work type or job type is one downloa
 
 ### How does it search every company without a list?
 
-Workable publishes one feed of "all job information for all our customers published on Jobs by Workable", updated every hour, as its help center says. A search by word, place, work type or job type reads that feed, so no list of companies is needed: on 329 hiring career pages checked on 2026-11-02, the feed held 99% of their open jobs. The companies you name, the empty form and job links read each company's own career page; for those the actor carries a list of 2,196 Workable accounts built from Common Crawl, the Wayback Machine and Workable's own feed, each of which answered on its career page on 2026-11-02 or 2026-11-03. A company that is not on the list is still read when you paste its link.
+The actor searches every company through Workable's own feed of "all job information for all our customers published on Jobs by Workable", updated every hour, as its help center says. A search by word, place, work type or job type reads that feed, so no list of companies is needed: on 329 hiring career pages checked on 2026-11-02, the feed held 99% of their open jobs. The companies you name, the empty form and job links read each company's own career page; for those the actor carries a list of 2,196 Workable accounts built from Common Crawl, the Wayback Machine and Workable's own feed, each of which answered on its career page on 2026-11-02 or 2026-11-03. A company that is not on the list is still read when you paste its link.
 
 ### Which posting date does it use?
 
-A search by word gives the time Workable listed the job on its job board. Measured on 6,000 jobs read both in the feed and on their career page on 2026-11-02, that was the job page's own day for 95% of them (98.5% of those published since September); 3.5% were listed more than a week after they were published, mostly old jobs listed late. The companies you name, and every search row with full details, carry the day the job page gives Google as its datePosted, with no time of day. A checked jobs.workable.com link carries the time Workable's job board gives it.
+The actor's posting date (`postedAt`) in a search by word is the time Workable listed the job on its job board. Measured on 6,000 jobs read both in the feed and on their career page on 2026-11-02, that was the job page's own day for 95% of them (98.5% of those published since September); 3.5% were listed more than a week after they were published, mostly old jobs listed late. The companies you name, and every search row with full details, carry the day the job page gives Google as its datePosted, with no time of day. A checked jobs.workable.com link carries the time Workable's job board gives it.
 
 ### Why does a hybrid or onsite search return fewer jobs?
 
@@ -175,7 +175,7 @@ Workable's feed and career pages mark only remote jobs. On Workable's own job bo
 
 ### Does it show pay?
 
-Only with full details on, and only when the company shows pay on the job: Workable's feed and its job board carry none. Pay comes as Workable states it, with the currency and the period (year, month, week, day or hour).
+The actor shows pay only with full details on, and only when the company shows pay on the job: Workable's feed and its job board carry none. Pay comes as Workable states it, with the currency and the period (year, month, week, day or hour).
 
 ### Why did a run say Workable refused it?
 
@@ -183,27 +183,27 @@ Workable's Cloudflare refuses an address that calls apply.workable.com too often
 
 ### Does it need a login or an API key?
 
-No. Workable's official API needs each employer's own token and reads only that employer's jobs. This actor reads what Workable publishes for anyone: its jobs feed, each company's career page and its job board. You need only an Apify account.
+The actor needs no login and no API key. Workable's official API needs each employer's own token and reads only that employer's jobs. This actor reads what Workable publishes for anyone: its jobs feed, each company's career page and its job board. You need only an Apify account.
 
 ### Does it work on Apify's free plan?
 
-Yes. Apify's free $5 monthly credit pays for about 1,900 jobs in runs of 100, at $0.26 a run with the run start.
+The actor works on Apify's free plan: the free $5 monthly credit pays for about 1,900 jobs in runs of 100, at $0.26 a run with the run start.
 
 ### How often should I run it?
 
-Once a day keeps a feed fresh. A search by word reads Workable's feed, which Workable updates every hour, so runs less than an hour apart read the same feed. Give the run a word, place, work type or job type so it reads every company (the empty form reads only the 300 biggest career pages) and set Posted in the last (`postedWithin`) to 24 hours. Set the run up under Schedules in Apify Console, and match rows on `jobId` to skip jobs you already have.
+Running the actor once a day keeps a Workable job feed fresh. A search by word reads Workable's feed, which Workable updates every hour, so runs less than an hour apart read the same feed. Give the run a word, place, work type or job type so it reads every company (the empty form reads only the 300 biggest career pages) and set Posted in the last (`postedWithin`) to 24 hours. Set the run up under Schedules in Apify Console, and match rows on `jobId` to skip jobs you already have.
 
 ### How do I get every job of one company?
 
-Type its name in Only these companies (`companies`), such as Hugging Face, the account in its address (huggingface) or its Workable link, and set Number of jobs (`maxJobs`) to 0 for every open job. Its career page is read live, with the department and the company's job code. A company that is not on our list of 2,196 accounts is tried by its name in lower case with hyphens; paste its link if that misses.
+To get every job of one Workable company, type its name in Only these companies (`companies`), such as Hugging Face, the account in its address (huggingface) or its Workable link, and set Number of jobs (`maxJobs`) to 0 for every open job. Its career page is read live, with the department and the company's job code. A company that is not on our list of 2,196 accounts is tried by its name in lower case with hyphens; paste its link if that misses.
 
 ### How do I check a list of job links?
 
-Paste the links into Job links to check (`jobUrls`), one per line, instead of searching: apply.workable.com, old company.workable.com and jobs.workable.com links all work. Each link comes back as one row, open with the job's fields, or closed or not found with its link, so 10 links come to $0.035 with the run start. On apply.workable.com a closed job and one that never existed answer the same, so both come back closed.
+To check Workable job links, paste them into Job links to check (`jobUrls`), one per line, instead of searching: apply.workable.com, old company.workable.com and jobs.workable.com links all work. Each link comes back as one row, open with the job's fields, or closed or not found with its link, so 10 links come to $0.035 with the run start. On apply.workable.com a closed job and one that never existed answer the same, so both come back closed.
 
 ### How do I call it from the API, Python, JavaScript, n8n or an AI agent?
 
-Each way uses your Apify token (Apify Console, Settings, API & Integrations) and takes the input as JSON, with the field names above.
+Calling the actor from the Apify API, Python, JavaScript, n8n, Make or an AI agent takes your Apify token (Apify Console, Settings, API & Integrations) and the input as JSON, with the field names above.
 
 **API.** One call runs the actor and returns its rows. Apify stops that wait after 300 seconds: a search by word takes about 2.5 minutes, inside it, but full details ask Workable up to 1,000 times at 2 calls a second, so for a details run use a client below, which waits until the run ends.
 
@@ -242,11 +242,11 @@ for (const row of items) console.log(row.title, row.company, row.location, row.p
 
 ### Am I charged for closed jobs?
 
-A search returns open jobs only. A pasted link that turns out closed or not found is one Job row, because it was checked and answered.
+A closed job is charged only when you paste its link to check: a search returns open jobs only, and a pasted link that turns out closed or not found is one Job row, because it was checked and answered.
 
 ### Is it legal to use?
 
-It reads public job postings. You are responsible for how you use the data, including each site's terms and the privacy laws that apply to you.
+The actor reads public job postings. You are responsible for how you use the data, including each site's terms and the privacy laws that apply to you.
 
 ## Limitations
 
