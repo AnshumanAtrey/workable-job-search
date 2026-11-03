@@ -15,7 +15,7 @@ Use it as a Workable API for every company's jobs, an apply.workable.com scraper
 
 ## How is it different from other Workable scrapers?
 
-- **You do not need to know the companies.** Half of the Workable-only actors below read Workable's job board search, which ranks by relevance, 20 jobs a page, with no date order; the others need each company's name or link, or read a stored copy. This actor reads Workable's own feed of every company's jobs and sorts the matches by date. On 329 hiring career pages checked on 2026-11-02, the feed held 7,691 of their 7,761 open jobs (99%). Workable ends the feed's download about a minute after it starts, which cut 15 of 16 downloads from our laptop: see Limitations.
+- **You do not need to know the companies.** Half of the Workable-only actors below read Workable's job board search, which ranks by relevance, 20 jobs a page, with no date order; the others need each company's name or link, or read a stored copy. This actor reads Workable's own feed of every company's jobs and sorts the matches by date. On 329 hiring career pages checked on 2026-11-02, the feed held 7,691 of their 7,761 open jobs (99%). On Apify the whole feed arrived on 2026-11-03, with jobs listed two hours before the run; from our laptop Workable cut 15 of 16 downloads about a minute in: see Limitations.
 - **One row per job.** Workable lists a job once per place. Here a job's places come together in one row: 14,534 of 79,763 jobs (18%) had two places or more on 2026-11-02.
 - **The real posting date.** A search by word carries the time Workable listed the job, which fell on the job page's own day for 95% of 6,000 jobs checked (98.5% of those published since September). With full details on, and for the companies you name, a search's rows carry the day the job page itself gives Google (its datePosted, 10 of 10 pages checked).
 - **Details from each job's own answer:** the full description, requirements and benefits, pay as numbers with its period when the company shows it, remote, hybrid or onsite, the department and the company's job code. Workable's job board shows no pay.
@@ -47,7 +47,7 @@ On paid Apify plans the job prices are 10% less on Scale ($0.00225 and $0.00315)
 | 1,000 jobs in one run | $2.51 |
 | Checking 10 job links | $0.035 |
 
-Why a run start: a search by word downloads Workable's feed, about 128 MB compressed, whatever it finds, and the run start pays for that download. Apify's free $5 monthly credit covers about 1,900 jobs in runs of 100. Number of jobs (`maxJobs`) and the run start set the most a run can cost, and a run stops at its spending limit with a message saying so.
+Why a run start: every search by word reads Workable's whole feed, about 140 MB compressed, whatever it finds, and the run start covers that fixed work. Apify's free $5 monthly credit covers about 1,900 jobs in runs of 100. Number of jobs (`maxJobs`) and the run start set the most a run can cost, and a run stops at its spending limit with a message saying so.
 
 ## How does the price compare with other Workable scrapers?
 
@@ -117,37 +117,37 @@ Example input:
 
 ## What does the output look like?
 
-One row per job, newest first. These five rows (ranked 5, 8, 13, 20 and 27 of 100) are from a local run of the actor's engine on 2026-11-03 against a copy of the first three quarters of Workable's feed (listings up to 2026-10-14), searching every company for software engineer: 931 jobs at 412 companies, the 100 newest saved. TODO_DEPLOYED: the rows, build number and seconds of the deployed build's example run go here.
+One row per job, newest first. These five rows (ranked 1, 9, 22, 45 and 69 of 100) are from a run on Apify on 2026-11-03, build 1.0.1, searching every company for software engineer in 157 seconds at the default 1 GB of memory: 1,177 jobs at 488 companies, the 100 newest saved, the newest listed two hours before the run.
 
 | Job title (`title`) | Company name (`company`) | Main location (`location`) | Remote or onsite (`workType`) | Job type (`employmentType`) | Posted on (`postedAt`) |
 |---|---|---|---|---|---|
-| Staff Software Engineer | SPD Technology | Croatia | remote | full-time | 2026-10-13 |
-| Software Engineer, AI/ML | Devsinc | Lahore, Punjab, Pakistan |  | full-time | 2026-10-13 |
-| Senior Software Engineer | Raydar | United States | remote | full-time | 2026-10-12 |
-| Java Software Engineer - Getting Paid & Open Banking | Starling | London, England, United Kingdom |  | full-time | 2026-10-12 |
-| Remote Full-Stack Software Engineer | Pearl | Bogotá, Colombia | remote | full-time | 2026-10-09 |
+| Software Engineer (Python) | Qode | Ho Chi Minh, Vietnam |  | full-time | 2026-11-03 |
+| Senior Software Engineer, Platform & Developer Experience | Worth AI | Orlando, Florida, United States | remote | full-time | 2026-11-03 |
+| Software Engineer (Edge - Networking & Fleet) - Remote | Zyte | Rio de Janeiro, Brazil | remote |  | 2026-11-02 |
+| Senior Software Engineer - Frontend | Mercari, Inc. (India) | Bengaluru, Karnataka, India |  | full-time | 2026-11-02 |
+| Intern, Software QA Engineer (Jan - Jun 2027) | QCP | Singapore |  | intern | 2026-10-30 |
 
-One row as JSON:
+One row as JSON, from the same run:
 
 ```json
 {
-  "title": "Java Software Engineer - Getting Paid & Open Banking",
-  "company": "Starling",
-  "location": "London, England, United Kingdom",
-  "otherLocations": ["Cardiff, Wales, United Kingdom", "Manchester, England, United Kingdom"],
-  "workType": null,
-  "employmentType": "full-time",
+  "title": "Senior Software Engineer - AI Oversight",
+  "company": "OpenMined",
+  "location": "Colombia",
+  "otherLocations": ["Brazil", "Argentina", "Uruguay"],
+  "workType": "remote",
+  "employmentType": "contract",
   "department": null,
   "salary": null,
-  "postedAt": "2026-10-12T11:20:13+00:00",
-  "jobUrl": "https://apply.workable.com/j/DC314E7FEE",
-  "applyUrl": "https://apply.workable.com/j/DC314E7FEE/apply",
+  "postedAt": "2026-11-02T23:26:54+00:00",
+  "jobUrl": "https://apply.workable.com/j/5DAF8993BF",
+  "applyUrl": "https://apply.workable.com/j/5DAF8993BF/apply",
   "status": "open",
   "platform": "workable",
-  "companySlug": "starling-bank",
-  "companyWebsite": "http://www.starlingbank.com",
-  "jobId": "DC314E7FEE",
-  "checkedAt": "2026-11-03T00:24:48+00:00"
+  "companySlug": "openmined",
+  "companyWebsite": "http://openmined.org",
+  "jobId": "5DAF8993BF",
+  "checkedAt": "2026-11-03T09:11:49+00:00"
 }
 ```
 
@@ -155,9 +155,9 @@ Full details add `description`, `descriptionHtml`, `reference`, `salaryMin`, `sa
 
 ## How fast is it?
 
-TODO_DEPLOYED: the seconds and cost of the empty form and of a keyword search at the default memory on the deployed build, with their run ids, and whether Workable's feed arrived whole there.
+About 2.5 minutes at the default 1 GB of memory, for a search by word and for the empty form alike (build 1.0.1, 2026-11-03). Software engineer across every company took 157 seconds, almost all of it reading Workable's whole feed, which arrived in full (run 6uFK1C6wG1NyXXCyO). The empty form took 155 seconds for the 300 biggest career pages, all of which answered (run 7XF3iMyDlPMqHCzpz). Each saved 100 jobs: $0.26 with the run start.
 
-How the time goes: a search by word, place, work type or job type is one download of Workable's feed, about 128 MB compressed and 860 MB of XML, read once for every word. From our laptop on 2026-11-02 and 2026-11-03, Workable ended that answer about 63 seconds after the request on 15 of 16 downloads; when it is cut, the run uses the part that came and 120 seconds of career pages. An empty search reads the career pages of the 300 biggest companies on our list, 2 a second, about 150 seconds, and reads the feed instead when Workable refuses them before any answers. Full details, a hybrid or onsite search and the companies you name ask Workable 2 calls a second, at most 1,000 calls a run.
+How the time goes: a search by word, place, work type or job type is one download of Workable's feed, about 140 MB compressed and 860 MB of XML, read once for every word. On Apify the whole feed arrived. From our laptop on 2026-11-02 and 2026-11-03, Workable ended that answer about 63 seconds after the request on 15 of 16 downloads; when it is cut, the run uses the part that came and 120 seconds of career pages. An empty search reads the career pages of the 300 biggest companies on our list, 2 a second, about 150 seconds, and reads the feed instead when Workable refuses them before any answers. Full details, a hybrid or onsite search and the companies you name ask Workable 2 calls a second, at most 1,000 calls a run.
 
 ## Common questions
 
@@ -212,7 +212,7 @@ It reads public job postings. You are responsible for how you use the data, incl
 
 - An empty search does not read every company: it reads the career pages of the 300 biggest companies on our list, about 150 seconds. Type a word, a place, a work type or a job type to search every company.
 - Workable's feed holds only the jobs a company publishes on Workable's job board: 99% of the open jobs on the career pages checked.
-- Workable ends the feed's download about a minute after it starts. From our laptop on 2026-11-02 and 2026-11-03 that cut 15 of 16 downloads, and the furthest a cut download reached was the listings of 2026-10-22, so the newest 11 days of jobs or more were missing from the feed. The run then keeps every job listed before the cut, reads 120 seconds of the career pages with the most matching jobs for the newer ones, and its message names the cut date. Other companies' newest jobs are not in such a run.
+- Workable ends the feed's download about a minute after it starts. On Apify on 2026-11-03 the whole feed arrived; from our laptop on 2026-11-02 and 2026-11-03 it cut 15 of 16 downloads, the furthest reaching the listings of 2026-10-22. If a run's download is cut, the run keeps every job listed before the cut, reads 120 seconds of the career pages with the most matching jobs for the newer ones, names the cut date in its message and marks OUTPUT partial. Other companies' newest jobs are not in such a run.
 - Hybrid and onsite are checked job by job, so those searches return fewer jobs (see above).
 - Full details ask Workable once or twice per job, at most 1,000 times a run: about 650 jobs found by a word get details, and the rest come without them, at the Job price.
 - Pay comes only with full details, when the company shows it; jobs.workable.com links carry no pay.

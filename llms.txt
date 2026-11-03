@@ -39,7 +39,7 @@ PAY_PER_EVENT model, platform usage included:
 
 - Job: $0.0025 per saved job, and per checked link that is closed or not found
 - Job with details: $0.0035 per saved job with full details on
-- Run start: $0.01 per run at the default 1 GB of memory, one more for each extra GB; it pays for the download of Workable's feed, about 128 MB, that a search makes whatever it finds
+- Run start: $0.01 per run at the default 1 GB of memory, one more for each extra GB; it covers the fixed work of reading Workable's whole feed, about 140 MB compressed, that every search by word does whatever it finds
 
 On paid Apify plans the job prices are 10% less on Scale ($0.00225 and $0.00315) and 20% less on Business and above ($0.002 and $0.0028); the run start stays $0.01.
 
@@ -76,27 +76,27 @@ Typical costs (Free and Starter price):
 
 ## Sample output (one record)
 
-From a local run of the engine on 2026-11-03, searching every company for software engineer in a copy of three quarters of Workable's feed. TODO_DEPLOYED: the same row as the README's, from the deployed build's example run.
+From a run on Apify on 2026-11-03, build 1.0.1, searching every company for software engineer in 157 seconds at the default 1 GB of memory (1,177 jobs at 488 companies, the 100 newest saved); the same row as the README's.
 
 ```json
 {
-  "title": "Java Software Engineer - Getting Paid & Open Banking",
-  "company": "Starling",
-  "location": "London, England, United Kingdom",
-  "otherLocations": ["Cardiff, Wales, United Kingdom", "Manchester, England, United Kingdom"],
-  "workType": null,
-  "employmentType": "full-time",
+  "title": "Senior Software Engineer - AI Oversight",
+  "company": "OpenMined",
+  "location": "Colombia",
+  "otherLocations": ["Brazil", "Argentina", "Uruguay"],
+  "workType": "remote",
+  "employmentType": "contract",
   "department": null,
   "salary": null,
-  "postedAt": "2026-10-12T11:20:13+00:00",
-  "jobUrl": "https://apply.workable.com/j/DC314E7FEE",
-  "applyUrl": "https://apply.workable.com/j/DC314E7FEE/apply",
+  "postedAt": "2026-11-02T23:26:54+00:00",
+  "jobUrl": "https://apply.workable.com/j/5DAF8993BF",
+  "applyUrl": "https://apply.workable.com/j/5DAF8993BF/apply",
   "status": "open",
   "platform": "workable",
-  "companySlug": "starling-bank",
-  "companyWebsite": "http://www.starlingbank.com",
-  "jobId": "DC314E7FEE",
-  "checkedAt": "2026-11-03T00:24:48+00:00"
+  "companySlug": "openmined",
+  "companyWebsite": "http://openmined.org",
+  "jobId": "5DAF8993BF",
+  "checkedAt": "2026-11-03T09:11:49+00:00"
 }
 ```
 
