@@ -11,12 +11,30 @@
             "title": "Find remote jobs at every company on Workable",
             "description": "Get the newest remote jobs from every company on Workable at once, with the company, every place, job type, posting date and link. Remote is what the company marked on Workable.",
             "input": {
-                "workType": ["remote"],
-                "maxJobs": 100
+                "workType": [
+                    "remote"
+                ],
+                "maxJobs": 100,
+                "searchTerms": [],
+                "location": [],
+                "postedWithin": "any time",
+                "includeDetails": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
             },
             "seoTitle": "Remote Jobs on Workable, Every Company at Once",
             "seoDescription": "Search every company on Workable for remote jobs at once, newest first, with company, places, job type, posting date and link. No login needed.",
-            "inputSchemaFields": ["searchTerms", "location", "workType", "employmentType", "postedWithin", "maxJobs"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "employmentType",
+                "postedWithin",
+                "maxJobs"
+            ],
             "datasetView": "jobs"
         },
         {
@@ -24,13 +42,29 @@
             "title": "Find new Workable jobs in the US from the last 24 hours",
             "description": "Get the newest jobs that companies on Workable listed in the United States in the last day, up to 100, with the company, place, job type and link. Schedule it daily for a fresh feed of US jobs.",
             "input": {
-                "location": ["United States"],
+                "location": [
+                    "United States"
+                ],
                 "postedWithin": "24 hours",
-                "maxJobs": 100
+                "maxJobs": 100,
+                "searchTerms": [],
+                "workType": [],
+                "includeDetails": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
             },
             "seoTitle": "New Workable Jobs in the US, Last 24 Hours",
             "seoDescription": "The newest jobs listed on Workable in the United States in the last day, with company, place, job type and link. Run it daily for a fresh feed.",
-            "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "postedWithin",
+                "maxJobs"
+            ],
             "datasetView": "jobs"
         },
         {
@@ -38,12 +72,29 @@
             "title": "Find software engineer jobs at every company on Workable",
             "description": "Search every company on Workable for software engineer jobs at once, newest first, with the company, every place, remote or not, job type, posting date and link.",
             "input": {
-                "searchTerms": ["software engineer"],
-                "maxJobs": 100
+                "searchTerms": [
+                    "software engineer"
+                ],
+                "maxJobs": 100,
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "includeDetails": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
             },
             "seoTitle": "Software Engineer Jobs on Workable, Every Company",
             "seoDescription": "The newest software engineer jobs on Workable, with company, places, remote or not and link. One search across every company, no login.",
-            "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "postedWithin",
+                "maxJobs"
+            ],
             "datasetView": "jobs"
         },
         {
@@ -51,13 +102,31 @@
             "title": "Find nurse jobs in the United States on Workable",
             "description": "Get the newest nurse jobs in the United States from every company on Workable at once, with the company, place, job type, posting date and link.",
             "input": {
-                "searchTerms": ["nurse"],
-                "location": ["United States"],
-                "maxJobs": 100
+                "searchTerms": [
+                    "nurse"
+                ],
+                "location": [
+                    "United States"
+                ],
+                "maxJobs": 100,
+                "workType": [],
+                "postedWithin": "any time",
+                "includeDetails": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
             },
             "seoTitle": "Nurse Jobs in the US on Workable, Newest First",
             "seoDescription": "Newest nurse jobs in the United States from every company hiring on Workable, with company, place, job type, posting date and link. No login.",
-            "inputSchemaFields": ["searchTerms", "location", "employmentType", "postedWithin", "maxJobs"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "employmentType",
+                "postedWithin",
+                "maxJobs"
+            ],
             "datasetView": "jobs"
         },
         {
@@ -65,13 +134,32 @@
             "title": "Find sales jobs in Europe on Workable",
             "description": "Get the newest sales and account executive jobs in Europe from every company on Workable, with the company, place, job type and link. Europe reads as its 51 countries.",
             "input": {
-                "searchTerms": ["sales", "account executive"],
-                "location": ["Europe"],
-                "maxJobs": 100
+                "searchTerms": [
+                    "sales",
+                    "account executive"
+                ],
+                "location": [
+                    "Europe"
+                ],
+                "maxJobs": 100,
+                "workType": [],
+                "postedWithin": "any time",
+                "includeDetails": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
             },
             "seoTitle": "Sales Jobs in Europe on Workable",
             "seoDescription": "Sales and account executive jobs in Europe from every company on Workable, newest first, with company, place, job type and link. No login or API key.",
-            "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "postedWithin",
+                "maxJobs"
+            ],
             "datasetView": "jobs"
         },
         {
@@ -79,12 +167,30 @@
             "title": "Find internships at every company on Workable",
             "description": "Get the newest internships from every company on Workable, with the company, place, remote or not, posting date and link. An internship is Workable's experience level Internship.",
             "input": {
-                "employmentType": ["intern"],
-                "maxJobs": 100
+                "employmentType": [
+                    "intern"
+                ],
+                "maxJobs": 100,
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "includeDetails": false,
+                "excludeTerms": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
             },
             "seoTitle": "Internships on Workable, Every Company at Once",
             "seoDescription": "Newest internships from every company hiring on Workable, with company, place, remote or not, posting date and link. One search, no login.",
-            "inputSchemaFields": ["searchTerms", "location", "workType", "employmentType", "postedWithin", "maxJobs"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "workType",
+                "employmentType",
+                "postedWithin",
+                "maxJobs"
+            ],
             "datasetView": "jobs"
         },
         {
@@ -92,13 +198,29 @@
             "title": "Get Workable data analyst jobs with descriptions, pay if shown",
             "description": "Get the newest data analyst jobs on Workable with full details: the description, requirements and benefits as text and HTML, pay as numbers with its period when the company shows it, department, job type and country.",
             "input": {
-                "searchTerms": ["data analyst"],
+                "searchTerms": [
+                    "data analyst"
+                ],
                 "includeDetails": true,
-                "maxJobs": 50
+                "maxJobs": 50,
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": [],
+                "jobUrls": []
             },
             "seoTitle": "Workable Jobs With Descriptions and Pay When Shown",
             "seoDescription": "Data analyst jobs on Workable with the full description, pay as numbers when shown, department, job type and country. Clean JSON for a job board or AI.",
-            "inputSchemaFields": ["searchTerms", "location", "postedWithin", "maxJobs", "includeDetails"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "postedWithin",
+                "maxJobs",
+                "includeDetails"
+            ],
             "datasetView": "details"
         },
         {
@@ -106,12 +228,28 @@
             "title": "Get every open Hugging Face job",
             "description": "Get every open job at Hugging Face, read live from its Workable career page, with the place, remote or not, department, job type, posting date and link.",
             "input": {
-                "companies": ["Hugging Face"],
-                "maxJobs": 0
+                "companies": [
+                    "Hugging Face"
+                ],
+                "maxJobs": 0,
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "includeDetails": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "jobUrls": []
             },
             "seoTitle": "Hugging Face Jobs API: Every Open Role",
             "seoDescription": "Every open Hugging Face job, read live from its Workable career page, with place, remote or not, department, job type and link. No login or API key.",
-            "inputSchemaFields": ["searchTerms", "location", "companies", "maxJobs"],
+            "inputSchemaFields": [
+                "searchTerms",
+                "location",
+                "companies",
+                "maxJobs"
+            ],
             "datasetView": "jobs"
         },
         {
@@ -119,11 +257,25 @@
             "title": "Check whether Workable job links are still open",
             "description": "Paste Workable job links from apply.workable.com or jobs.workable.com and each comes back open, closed or not found, with the job's details when it is open. Handy for cleaning dead links out of a job board or a spreadsheet.",
             "input": {
-                "jobUrls": ["https://jobs.workable.com/view/18VzuEw6gLm9HFsyTK842e/cctv-drainage-engineer-in-leeds-at-lanes-group"]
+                "jobUrls": [
+                    "https://jobs.workable.com/view/18VzuEw6gLm9HFsyTK842e/cctv-drainage-engineer-in-leeds-at-lanes-group"
+                ],
+                "searchTerms": [],
+                "location": [],
+                "workType": [],
+                "postedWithin": "any time",
+                "maxJobs": 100,
+                "includeDetails": false,
+                "excludeTerms": [],
+                "employmentType": [],
+                "searchDescriptions": false,
+                "companies": []
             },
             "seoTitle": "Check if Workable Job Links Are Still Open",
             "seoDescription": "Paste Workable job links and see which are open, closed or gone. Clean dead links out of a job board or a spreadsheet, with no login or API key.",
-            "inputSchemaFields": ["jobUrls"],
+            "inputSchemaFields": [
+                "jobUrls"
+            ],
             "datasetView": "jobs"
         }
     ]

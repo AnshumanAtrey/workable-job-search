@@ -163,9 +163,6 @@
             "editor": "stringList",
             "description": "Paste Workable job links to check whether they are still open, one per line, instead of searching. Each link comes back open with the job, closed, or not found. apply.workable.com, old company.workable.com and jobs.workable.com links all work. On apply.workable.com a closed job and one that never existed answer the same, so both come back closed. If none of the lines is a Workable job link, the run searches instead and charges for the jobs it finds.",
             "placeholderValue": "https://apply.workable.com/j/DC314E7FEE",
-            "example": [
-                "https://apply.workable.com/j/DC314E7FEE"
-            ],
             "default": [],
             "sectionCaption": "Check job links",
             "nullable": true
