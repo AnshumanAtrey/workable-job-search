@@ -9,7 +9,7 @@
         ]
     },
     "actorPermissionLevel": "LIMITED_PERMISSIONS",
-    "isPublic": false,
+    "isPublic": true,
     "defaultRunOptions": {
         "build": "latest",
         "memoryMbytes": 1024,
