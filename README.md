@@ -6,7 +6,7 @@ Use it as a Workable API for every company's jobs, an apply.workable.com scraper
 
 ## What does it do?
 
-- **Searches every company on Workable at once.** A word, a place, a work type or a job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour. Workable's job board counted 170,374 listings on 2026-11-02, one per job and place; the first three quarters of the feed alone held 79,769 open jobs at 4,792 companies in 181 countries, among them Rentokil Initial, Amartha, SAP Fioneer, Teleperformance Spain, Biffa, Foodics, Blueground and Hugging Face.
+- **Searches every company on Workable at once.** A word, a place, a work type or a job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour. Workable's job board counted 170,374 listings on 2026-11-02, one per job and place; the first three quarters of the feed alone held 79,763 open jobs at 4,792 companies in 181 countries, among them Rentokil Initial, Amartha, SAP Fioneer, Teleperformance Spain, Biffa, Foodics, Blueground and Hugging Face.
 - **One keyword is enough.** Type a job title and press Start.
 - **Newest first, read at run time.** Every job comes from Workable during your run, not from a stored copy of ours.
 - **Filters that take what people type.** Germany, Texas or TX, EMEA, Remote, contract, internship, last 24 hours, a jobs.workable.com search link, or a pasted Google dork such as `site:apply.workable.com intext:engineer`.
@@ -15,8 +15,8 @@ Use it as a Workable API for every company's jobs, an apply.workable.com scraper
 
 ## How is it different from other Workable scrapers?
 
-- **You do not need to know the companies.** Half of the Workable-only actors below read Workable's job board search, which ranks by relevance, 20 jobs a page, with no date order; the others need each company's name or link, or read a stored copy. This actor reads Workable's own feed of every company's jobs and sorts the matches by date. On 329 hiring career pages checked on 2026-11-02, the feed held 7,691 of their 7,761 open jobs (99%). Workable ends the feed's download about a minute after it starts, which cut 14 of 15 downloads from our laptop: see Limitations.
-- **One row per job.** Workable lists a job once per place. Here a job's places come together in one row: 14,536 of 79,769 jobs (18%) had two places or more on 2026-11-02.
+- **You do not need to know the companies.** Half of the Workable-only actors below read Workable's job board search, which ranks by relevance, 20 jobs a page, with no date order; the others need each company's name or link, or read a stored copy. This actor reads Workable's own feed of every company's jobs and sorts the matches by date. On 329 hiring career pages checked on 2026-11-02, the feed held 7,691 of their 7,761 open jobs (99%). Workable ends the feed's download about a minute after it starts, which cut 15 of 16 downloads from our laptop: see Limitations.
+- **One row per job.** Workable lists a job once per place. Here a job's places come together in one row: 14,534 of 79,763 jobs (18%) had two places or more on 2026-11-02.
 - **The real posting date.** A search by word carries the time Workable listed the job, which fell on the job page's own day for 95% of 6,000 jobs checked (98.5% of those published since September). With full details on, and for the companies you name, a search's rows carry the day the job page itself gives Google (its datePosted, 10 of 10 pages checked).
 - **Details from each job's own answer:** the full description, requirements and benefits, pay as numbers with its period when the company shows it, remote, hybrid or onsite, the department and the company's job code. Workable's job board shows no pay.
 - **You pay per saved job**, plus one run start, and a spending limit stops the run cleanly with the jobs it paid for.
@@ -84,7 +84,7 @@ Every actor for many platforms that reads Workable, with 40 or more users:
 
 Not counted: kaix/linkedin-jobs-scraper (174 users) reads LinkedIn and names Workable only as an apply link, doggo/uk-jobs-board-scraper (40) checks apply links against ATS names, and parsebird/hiring-cafe-scraper (39) reads hiring.cafe.
 
-Where others are cheaper: shahidirfan and schnellscrapers charge $0.001 a job plus a $0.005 start through Workable's job board search, api-co/workable-jobs-search (1 user) $0.00075 on the free plan and $0.0012 to $0.0015 on paid plans the same way, practical_ophthalmologist_iuq $0.0018 plus a $0.001 start and deadwood_data_solutions $0.002 plus $0.01 a query for the career pages you name, jobspipe $0.00196 in its many-board search, and openclawai $0.0005 when you know the companies. Where others do more: the multi-platform actors cover many ATS in one run, and jobo.world, factpipe and jtpalms put the description in every row.
+Where others are cheaper: shahidirfan and schnellscrapers charge $0.001 a job plus a $0.005 start through Workable's job board search, api-co (1 user) $0.00075 on the free plan and $0.0012 to $0.0015 on paid plans the same way, practical_ophthalmologist_iuq $0.0018 plus a $0.001 start and deadwood_data_solutions $0.002 plus $0.01 a query for the career pages you name, jobspipe $0.00196 in its many-board search, and openclawai $0.0005 when you know the companies. Where others do more: the multi-platform actors cover many ATS in one run, and jobo.world, factpipe and jtpalms put the description in every row.
 
 ## Which inputs does it take?
 
@@ -157,7 +157,7 @@ Full details add `description`, `descriptionHtml`, `reference`, `salaryMin`, `sa
 
 TODO_DEPLOYED: the seconds and cost of the empty form and of a keyword search at the default memory on the deployed build, with their run ids, and whether Workable's feed arrived whole there.
 
-How the time goes: a search by word, place, work type or job type is one download of Workable's feed, about 128 MB compressed and 860 MB of XML, read once for every word. From our laptop on 2026-11-02 and 2026-11-03, Workable ended that answer about 63 seconds after the request on 14 of 15 downloads; when it is cut, the run uses the part that came and 120 seconds of career pages. An empty search reads the career pages of the 300 biggest companies on our list, 2 a second, about 150 seconds, and reads the feed instead when Workable refuses them before any answers. Full details, a hybrid or onsite search and the companies you name ask Workable 2 calls a second, at most 1,000 calls a run.
+How the time goes: a search by word, place, work type or job type is one download of Workable's feed, about 128 MB compressed and 860 MB of XML, read once for every word. From our laptop on 2026-11-02 and 2026-11-03, Workable ended that answer about 63 seconds after the request on 15 of 16 downloads; when it is cut, the run uses the part that came and 120 seconds of career pages. An empty search reads the career pages of the 300 biggest companies on our list, 2 a second, about 150 seconds, and reads the feed instead when Workable refuses them before any answers. Full details, a hybrid or onsite search and the companies you name ask Workable 2 calls a second, at most 1,000 calls a run.
 
 ## Common questions
 
@@ -212,7 +212,7 @@ It reads public job postings. You are responsible for how you use the data, incl
 
 - An empty search does not read every company: it reads the career pages of the 300 biggest companies on our list, about 150 seconds. Type a word, a place, a work type or a job type to search every company.
 - Workable's feed holds only the jobs a company publishes on Workable's job board: 99% of the open jobs on the career pages checked.
-- Workable ends the feed's download about a minute after it starts. From our laptop on 2026-11-02 and 2026-11-03 that cut 14 of 15 downloads, and the furthest a cut download reached was the listings of 2026-10-22, so the newest 11 days of jobs or more were missing from the feed. The run then keeps every job listed before the cut, reads 120 seconds of the career pages with the most matching jobs for the newer ones, and its message names the cut date. Other companies' newest jobs are not in such a run.
+- Workable ends the feed's download about a minute after it starts. From our laptop on 2026-11-02 and 2026-11-03 that cut 15 of 16 downloads, and the furthest a cut download reached was the listings of 2026-10-22, so the newest 11 days of jobs or more were missing from the feed. The run then keeps every job listed before the cut, reads 120 seconds of the career pages with the most matching jobs for the newer ones, and its message names the cut date. Other companies' newest jobs are not in such a run.
 - Hybrid and onsite are checked job by job, so those searches return fewer jobs (see above).
 - Full details ask Workable once or twice per job, at most 1,000 times a run: about 650 jobs found by a word get details, and the rest come without them, at the Job price.
 - Pay comes only with full details, when the company shows it; jobs.workable.com links carry no pay.
