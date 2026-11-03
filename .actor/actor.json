@@ -14,7 +14,7 @@
     "output": "./output_schema.json",
     "dockerfile": "../Dockerfile",
     "readme": "../README.md",
-    "minMemoryMbytes": 512,
+    "minMemoryMbytes": 1024,
     "maxMemoryMbytes": 4096,
     "storages": {
         "dataset": {
