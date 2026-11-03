@@ -1,5 +1,5 @@
 {
-    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. Every task but the Hugging Face one has a word, place, work type or job type, so it reads Workable's feed of every company; an empty search would read only the biggest career pages. TODO_DEPLOYED: options.memoryMbytes follows the default memory chosen in store.json.",
+    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. Every search task but the Hugging Face one has a word, place, work type or job type, so it reads Workable's feed of every company; an empty search would read only the biggest career pages. The link check uses a jobs.workable.com link that was open on 2026-11-03 (one call to jobs.workable.com). TODO_DEPLOYED: options.memoryMbytes follows the default memory chosen in store.json.",
     "options": {
         "build": "latest",
         "memoryMbytes": 1024,
@@ -22,14 +22,14 @@
         {
             "name": "new-workable-jobs-us-last-24-hours",
             "title": "Find new Workable jobs in the US from the last 24 hours",
-            "description": "Get every job that companies on Workable listed in the United States in the last day, newest first, with the company, place, job type and link. Schedule it daily for a fresh feed of US jobs.",
+            "description": "Get the newest jobs that companies on Workable listed in the United States in the last day, up to 100, with the company, place, job type and link. Schedule it daily for a fresh feed of US jobs.",
             "input": {
                 "location": ["United States"],
                 "postedWithin": "24 hours",
                 "maxJobs": 100
             },
             "seoTitle": "New Workable Jobs in the US, Last 24 Hours",
-            "seoDescription": "Every job listed on Workable in the United States in the last day, newest first, with company, place, job type and link. Run it daily for a fresh feed.",
+            "seoDescription": "The newest jobs listed on Workable in the United States in the last day, with company, place, job type and link. Run it daily for a fresh feed.",
             "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
             "datasetView": "jobs"
         },
@@ -42,7 +42,7 @@
                 "maxJobs": 100
             },
             "seoTitle": "Software Engineer Jobs on Workable, Every Company",
-            "seoDescription": "Every software engineer job on Workable, newest first, with company, places, remote or not and link. One search across every company, no login.",
+            "seoDescription": "The newest software engineer jobs on Workable, with company, places, remote or not and link. One search across every company, no login.",
             "inputSchemaFields": ["searchTerms", "location", "workType", "postedWithin", "maxJobs"],
             "datasetView": "jobs"
         },
@@ -63,7 +63,7 @@
         {
             "name": "sales-jobs-europe-workable",
             "title": "Find sales jobs in Europe on Workable",
-            "description": "Get the newest sales and account executive jobs in Europe from every company on Workable, including jobs posted for EMEA and jobs open worldwide, with the company, place and link.",
+            "description": "Get the newest sales and account executive jobs in Europe from every company on Workable, with the company, place, job type and link. Europe reads as its 51 countries.",
             "input": {
                 "searchTerms": ["sales", "account executive"],
                 "location": ["Europe"],
@@ -89,14 +89,14 @@
         },
         {
             "name": "workable-jobs-with-pay-and-descriptions",
-            "title": "Get Workable data analyst jobs with pay and descriptions",
+            "title": "Get Workable data analyst jobs with descriptions, pay if shown",
             "description": "Get the newest data analyst jobs on Workable with full details: the description, requirements and benefits as text and HTML, pay as numbers with its period when the company shows it, department, job type and country.",
             "input": {
                 "searchTerms": ["data analyst"],
                 "includeDetails": true,
                 "maxJobs": 50
             },
-            "seoTitle": "Workable Jobs With Pay and Descriptions",
+            "seoTitle": "Workable Jobs With Descriptions and Pay When Shown",
             "seoDescription": "Data analyst jobs on Workable with the full description, pay as numbers when shown, department, job type and country. Clean JSON for a job board or AI.",
             "inputSchemaFields": ["searchTerms", "location", "postedWithin", "maxJobs", "includeDetails"],
             "datasetView": "details"
@@ -112,6 +112,18 @@
             "seoTitle": "Hugging Face Jobs API: Every Open Role",
             "seoDescription": "Every open Hugging Face job, read live from its Workable career page, with place, remote or not, department, job type and link. No login or API key.",
             "inputSchemaFields": ["searchTerms", "location", "companies", "maxJobs"],
+            "datasetView": "jobs"
+        },
+        {
+            "name": "check-workable-job-links",
+            "title": "Check whether Workable job links are still open",
+            "description": "Paste Workable job links from apply.workable.com or jobs.workable.com and each comes back open, closed or not found, with the job's details when it is open. Handy for cleaning dead links out of a job board or a spreadsheet.",
+            "input": {
+                "jobUrls": ["https://jobs.workable.com/view/18VzuEw6gLm9HFsyTK842e/cctv-drainage-engineer-in-leeds-at-lanes-group"]
+            },
+            "seoTitle": "Check if Workable Job Links Are Still Open",
+            "seoDescription": "Paste Workable job links and see which are open, closed or gone. Clean dead links out of a job board or a spreadsheet, with no login or API key.",
+            "inputSchemaFields": ["jobUrls"],
             "datasetView": "jobs"
         }
     ]

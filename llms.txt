@@ -4,7 +4,7 @@
 
 ## Summary
 
-Workable Job Search is an Apify actor that searches every company hiring on Workable at once and returns one row per job, newest first: title, company, every place, remote or not, job type, posting date, company website and links. A search by word, place, work type or job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour; on 2026-11-02 Workable's job board counted 170,374 listings (one per job and place), and the first three quarters of the feed held 79,774 open jobs at 4,792 companies in 181 countries. Named companies are read live from their career pages, and job links are checked live. Full details add the description, requirements and benefits, pay as numbers with its period when the company shows it, the work type, the department and the company's job code. No login and no API key.
+Workable Job Search is an Apify actor that searches every company hiring on Workable at once and returns one row per job, newest first: title, company, every place, remote or not, job type, posting date, company website and links. A search by word, place, work type or job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour; on 2026-11-02 Workable's job board counted 170,374 listings (one per job and place), and the first three quarters of the feed held 79,769 open jobs at 4,792 companies in 181 countries. Named companies are read live from their career pages, and job links are checked live. Full details add the description, requirements and benefits, pay as numbers with its period when the company shows it, the work type, the department and the company's job code. No login and no API key.
 
 Store: https://apify.com/anshumanatrey/workable-job-search
 Source: https://github.com/AnshumanAtrey/workable-job-search
@@ -12,21 +12,21 @@ Source: https://github.com/AnshumanAtrey/workable-job-search
 ## Key features
 
 - Every company at once, with no list of companies needed: the feed held 99% of the open jobs on 329 hiring career pages checked on 2026-11-02.
-- One keyword is enough; every match comes back sorted by date, not by relevance.
+- One keyword is enough; the matches come back sorted by date, not by relevance.
 - One row per job: a job Workable lists once per place comes with all its places.
 - Posting date: the time Workable listed the job (the job page's own day for 95% of 6,000 jobs checked), or with full details the day the job page gives Google.
-- Place filter by city, state, country or region: Germany, EMEA, LatAm, Worldwide.
+- Place filter by city, state, country or region: Germany, Texas or TX, EMEA, LatAm, or Remote.
 - Reads a pasted Google dork such as site:apply.workable.com intext:engineer.
 - Job link check: apply.workable.com and jobs.workable.com links come back open, closed or not found.
 
 ## Input keys
 
 - Job titles to find (searchTerms): one per line; a job matches when its title has every word.
-- Where the job is (location): city, state, country or region.
+- Where the job is (location): city, state (by name or code), country or region; Remote asks for remote jobs.
 - Remote or onsite (workType): remote, hybrid or onsite; hybrid and onsite are checked job by job for up to 90 seconds.
 - Posted in the last (postedWithin): 24 hours, 3 days, 7 days, 30 days, any time, or your own period.
 - Number of jobs (maxJobs): 100 by default, 0 for every match.
-- Full details (includeDetails): adds the description, pay as numbers with its period when shown, work type, department, the company's job code, city, region and country.
+- Full details (includeDetails): adds the description, pay as numbers with its period when shown, work type, department, the company's job code, city, region and country; at most 1,000 calls to Workable a run (about 650 jobs found by a word).
 - Leave out words (excludeTerms): drops jobs whose title has these words.
 - Job type (employmentType): full-time, part-time, contract, intern or temporary.
 - Match descriptions (searchDescriptions): finds your words in the description too.
@@ -39,7 +39,7 @@ PAY_PER_EVENT model, platform usage included:
 
 - Job: $0.0025 per saved job, and per checked link that is closed or not found
 - Job with details: $0.0035 per saved job with full details on
-- Run start: $0.01 per run at the default 1 GB of memory, one more for each extra GB; it pays for the download of Workable's whole feed, about 128 MB, that a search makes whatever it finds
+- Run start: $0.01 per run at the default 1 GB of memory, one more for each extra GB; it pays for the download of Workable's feed, about 128 MB, that a search makes whatever it finds
 
 On paid Apify plans the job prices are 10% less on Scale ($0.00225 and $0.00315) and 20% less on Business and above ($0.002 and $0.0028); the run start stays $0.01.
 
@@ -76,7 +76,7 @@ Typical costs (Free and Starter price):
 
 ## Sample output (one record)
 
-From a local run of the engine on 2026-11-02, searching every company for software engineer in a copy of three quarters of Workable's feed. TODO_DEPLOYED: the same row as the README's, from the deployed build's example run.
+From a local run of the engine on 2026-11-03, searching every company for software engineer in a copy of three quarters of Workable's feed. TODO_DEPLOYED: the same row as the README's, from the deployed build's example run.
 
 ```json
 {
@@ -96,7 +96,7 @@ From a local run of the engine on 2026-11-02, searching every company for softwa
   "companySlug": "starling-bank",
   "companyWebsite": "http://www.starlingbank.com",
   "jobId": "DC314E7FEE",
-  "checkedAt": "2026-11-02T20:39:14+00:00"
+  "checkedAt": "2026-11-03T00:24:48+00:00"
 }
 ```
 
@@ -104,7 +104,7 @@ From a local run of the engine on 2026-11-02, searching every company for softwa
 
 - vs fantastic-jobs/career-site-job-listing-api ($0.012 per job, $0.01 start): many more platforms from a stored database; this actor costs less per job and reads Workable's own feed at run time.
 - vs factpipe/ats-jobs-feed and jtpalms/ats-jobs-index ($0.003 per job): multi-ATS indexes with the description in every row; this actor reads every Workable company from Workable's own hourly feed, and gives the description with full details on.
-- vs shahidirfan/Workable-Job-Scraper ($0.001 per job, $0.005 start): cheaper per job through Workable's job board search, which ranks by relevance; this actor returns every match sorted by date, one row per job.
+- vs shahidirfan/Workable-Job-Scraper ($0.001 per job, $0.005 start): cheaper per job through Workable's job board search, which ranks by relevance; this actor returns the matches sorted by date, one row per job.
 
 ## Documentation
 

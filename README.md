@@ -2,28 +2,28 @@
 
 Workable jobs scraper and API: search every company hiring on Workable (apply.workable.com and jobs.workable.com) at once and get each job's title, company, every place, remote or not, job type, posting date, company website and links, newest first. Turn on full details for the description, requirements and benefits, the pay when the company shows it, the department and the company's own job code.
 
-Use it as a Workable jobs API, an apply.workable.com scraper, a jobs.workable.com scraper or a daily Workable job feed from the Apify Console, the Apify API, Python, JavaScript, n8n, Make or an AI agent, and export JSON, CSV or Excel. It is the `site:apply.workable.com` Google dork done at the source, with the fields a search result cannot give you. Available as an [Apify Actor](https://apify.com/anshumanatrey/workable-job-search). $0.0025 per job, $0.0035 with full details, $0.01 per run start, no login, no API key.
+Use it as a Workable API for every company's jobs, an apply.workable.com scraper, a jobs.workable.com scraper or a daily Workable job feed from the Apify Console, the Apify API, Python, JavaScript, n8n, Make or an AI agent, and export JSON, CSV or Excel. It is the `site:apply.workable.com` Google dork done at the source, with the fields a search result cannot give you. Available as an [Apify Actor](https://apify.com/anshumanatrey/workable-job-search). $0.0025 per job, $0.0035 with full details, $0.01 per run start, no login, no API key.
 
 ## What does it do?
 
-- **Searches every company on Workable at once.** A word, a place, a work type or a job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour. Workable's job board counted 170,374 listings on 2026-11-02, one per job and place; the first three quarters of the feed alone held 79,774 open jobs at 4,792 companies in 181 countries, among them Rentokil Initial, Amartha, SAP Fioneer, Teleperformance, Biffa, Foodics, Blueground and Hugging Face.
+- **Searches every company on Workable at once.** A word, a place, a work type or a job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour. Workable's job board counted 170,374 listings on 2026-11-02, one per job and place; the first three quarters of the feed alone held 79,769 open jobs at 4,792 companies in 181 countries, among them Rentokil Initial, Amartha, SAP Fioneer, Teleperformance Spain, Biffa, Foodics, Blueground and Hugging Face.
 - **One keyword is enough.** Type a job title and press Start.
 - **Newest first, read at run time.** Every job comes from Workable during your run, not from a stored copy of ours.
-- **Filters that take what people type.** Germany, EMEA, Remote, contract, internship, last 24 hours, or a pasted Google dork such as `site:apply.workable.com intext:engineer`.
+- **Filters that take what people type.** Germany, Texas or TX, EMEA, Remote, contract, internship, last 24 hours, a jobs.workable.com search link, or a pasted Google dork such as `site:apply.workable.com intext:engineer`.
 - **Any company by name.** Type Hugging Face, the account in its address or its career page link, and that career page is read live.
 - **Checks job links.** apply.workable.com and jobs.workable.com links come back open, closed or not found.
 
 ## How is it different from other Workable scrapers?
 
-- **You do not need to know the companies, and you get every match.** Half of the Workable-only actors below read Workable's job board search, which ranks by relevance, 20 jobs a page, with no date order; the others need each company's name or link, or read a stored copy. This actor reads Workable's whole feed and sorts every match by date. On 329 hiring career pages checked on 2026-11-02, the feed held 7,691 of their 7,761 open jobs (99%).
-- **One row per job.** Workable lists a job once per place. Here a job's places come together in one row: 14,539 of 79,774 jobs (18%) had two places or more on 2026-11-02.
+- **You do not need to know the companies.** Half of the Workable-only actors below read Workable's job board search, which ranks by relevance, 20 jobs a page, with no date order; the others need each company's name or link, or read a stored copy. This actor reads Workable's own feed of every company's jobs and sorts the matches by date. On 329 hiring career pages checked on 2026-11-02, the feed held 7,691 of their 7,761 open jobs (99%). Workable ends the feed's download about a minute after it starts, which cut 14 of 15 downloads from our laptop: see Limitations.
+- **One row per job.** Workable lists a job once per place. Here a job's places come together in one row: 14,536 of 79,769 jobs (18%) had two places or more on 2026-11-02.
 - **The real posting date.** A search by word carries the time Workable listed the job, which fell on the job page's own day for 95% of 6,000 jobs checked (98.5% of those published since September). With full details on, and for the companies you name, a search's rows carry the day the job page itself gives Google (its datePosted, 10 of 10 pages checked).
 - **Details from each job's own answer:** the full description, requirements and benefits, pay as numbers with its period when the company shows it, remote, hybrid or onsite, the department and the company's job code. Workable's job board shows no pay.
 - **You pay per saved job**, plus one run start, and a spending limit stops the run cleanly with the jobs it paid for.
 
 ## When should I use it?
 
-- **Job seekers and job boards:** remote and international jobs at small and mid-size companies in 181 countries, on a daily schedule. The US holds 43% of the jobs, the UK and Greece 6% each, Canada 4%.
+- **Job seekers and job boards:** remote and international jobs at 4,792 companies in 181 countries, on a daily schedule. In the first three quarters of the feed on 2026-11-02, the US held 43% of the jobs, the UK and Greece 6% each, Canada 4%.
 - **Recruiters and staffing agencies:** see who is hiring for a role across every company on Workable.
 - **Sales and market research:** every job found by a word names the hiring company and its website, a ready list of companies that are hiring now.
 - **Data teams and AI agents:** one clean, stable feed of Workable jobs through the API or MCP.
@@ -47,7 +47,7 @@ On paid Apify plans the job prices are 10% less on Scale ($0.00225 and $0.00315)
 | 1,000 jobs in one run | $2.51 |
 | Checking 10 job links | $0.035 |
 
-Why a run start: a search by word downloads Workable's whole feed, about 128 MB compressed, whatever it finds, and the run start pays for that download. Apify's free $5 monthly credit covers about 1,900 jobs in runs of 100. Number of jobs (`maxJobs`) sets the most a run can cost, and a run stops at its spending limit with a message saying so.
+Why a run start: a search by word downloads Workable's feed, about 128 MB compressed, whatever it finds, and the run start pays for that download. Apify's free $5 monthly credit covers about 1,900 jobs in runs of 100. Number of jobs (`maxJobs`) and the run start set the most a run can cost, and a run stops at its spending limit with a message saying so.
 
 ## How does the price compare with other Workable scrapers?
 
@@ -65,7 +65,7 @@ Every actor made for Workable alone with 2 or more users:
 | deadwood_data_solutions/workable-jobs-api | 2 | $0.002, plus $0.01 a query | none | The companies you name, or its index of 66 boards |
 | kenko404/workable-job-scraper | 2 | $0.003 | $0.005 | The companies you name, by name or link |
 | practical_ophthalmologist_iuq/workable-jobs-scraper | 2 | $0.0018 | $0.001 | The career pages you name |
-| This actor | new | $0.0025 | $0.01 | Workable's whole feed for every company, the career pages you name, and job links |
+| This actor | new | $0.0025 | $0.01 | Workable's feed for every company, the career pages you name, and job links |
 
 Every actor for many platforms that reads Workable, with 40 or more users:
 
@@ -84,7 +84,7 @@ Every actor for many platforms that reads Workable, with 40 or more users:
 
 Not counted: kaix/linkedin-jobs-scraper (174 users) reads LinkedIn and names Workable only as an apply link, doggo/uk-jobs-board-scraper (40) checks apply links against ATS names, and parsebird/hiring-cafe-scraper (39) reads hiring.cafe.
 
-Where others are cheaper: shahidirfan and schnellscrapers charge $0.001 a job plus a $0.005 start through Workable's job board search, api-co/workable-jobs-search (1 user) $0.00075 on the free plan and $0.0015 on paid plans the same way, and openclawai $0.0005 when you know the companies. Where others do more: the multi-platform actors cover many ATS in one run, and jobo.world, factpipe and jtpalms put the description in every row.
+Where others are cheaper: shahidirfan and schnellscrapers charge $0.001 a job plus a $0.005 start through Workable's job board search, api-co/workable-jobs-search (1 user) $0.00075 on the free plan and $0.0012 to $0.0015 on paid plans the same way, practical_ophthalmologist_iuq $0.0018 plus a $0.001 start and deadwood_data_solutions $0.002 plus $0.01 a query for the career pages you name, jobspipe $0.00196 in its many-board search, and openclawai $0.0005 when you know the companies. Where others do more: the multi-platform actors cover many ATS in one run, and jobo.world, factpipe and jtpalms put the description in every row.
 
 ## Which inputs does it take?
 
@@ -92,8 +92,8 @@ Nothing is required. Type a job title and press Start, or press Start with the f
 
 | Field | What it does |
 |---|---|
-| Job titles to find (`searchTerms`) | One per line. A job matches when its title has every word: frontend also finds Front-End. A pasted Google dork or Workable link works too |
-| Where the job is (`location`) | A city, state, country or region: London, United States, EMEA, LatAm. Worldwide finds jobs open everywhere, and Remote asks for remote jobs |
+| Job titles to find (`searchTerms`) | One per line. A job matches when its title has every word: frontend also finds Front-End. A pasted Google dork, Workable link or jobs.workable.com search link works too |
+| Where the job is (`location`) | A city, state, country or region: London, Texas or TX, United States, EMEA, LatAm. Remote asks for remote jobs; Workable gives every job a country, so none is marked worldwide |
 | Remote or onsite (`workType`) | remote, hybrid or onsite. Workable marks remote jobs in its lists; hybrid and onsite are checked job by job |
 | Posted in the last (`postedWithin`) | 24 hours, 3 days, 7 days, 30 days, any time, or your own period such as 48 hours |
 | Number of jobs (`maxJobs`) | How many, newest first: 100 by default, 0 for every match |
@@ -117,7 +117,7 @@ Example input:
 
 ## What does the output look like?
 
-One row per job, newest first. These rows are from a local run of the actor's engine on 2026-11-02 against a copy of the first three quarters of Workable's feed (listings up to 2026-10-14), searching every company for software engineer: 931 jobs at 412 companies, the 100 newest saved. TODO_DEPLOYED: the rows, build number and seconds of the deployed build's example run go here.
+One row per job, newest first. These five rows (ranked 5, 8, 13, 20 and 27 of 100) are from a local run of the actor's engine on 2026-11-03 against a copy of the first three quarters of Workable's feed (listings up to 2026-10-14), searching every company for software engineer: 931 jobs at 412 companies, the 100 newest saved. TODO_DEPLOYED: the rows, build number and seconds of the deployed build's example run go here.
 
 | Job title (`title`) | Company name (`company`) | Main location (`location`) | Remote or onsite (`workType`) | Job type (`employmentType`) | Posted on (`postedAt`) |
 |---|---|---|---|---|---|
@@ -125,7 +125,7 @@ One row per job, newest first. These rows are from a local run of the actor's en
 | Software Engineer, AI/ML | Devsinc | Lahore, Punjab, Pakistan |  | full-time | 2026-10-13 |
 | Senior Software Engineer | Raydar | United States | remote | full-time | 2026-10-12 |
 | Java Software Engineer - Getting Paid & Open Banking | Starling | London, England, United Kingdom |  | full-time | 2026-10-12 |
-| Remote Full-Stack Software Engineer | Pearl | Bogotá, Bogota, Colombia | remote | full-time | 2026-10-09 |
+| Remote Full-Stack Software Engineer | Pearl | Bogotá, Colombia | remote | full-time | 2026-10-09 |
 
 One row as JSON:
 
@@ -147,7 +147,7 @@ One row as JSON:
   "companySlug": "starling-bank",
   "companyWebsite": "http://www.starlingbank.com",
   "jobId": "DC314E7FEE",
-  "checkedAt": "2026-11-02T20:39:14+00:00"
+  "checkedAt": "2026-11-03T00:24:48+00:00"
 }
 ```
 
@@ -157,13 +157,13 @@ Full details add `description`, `descriptionHtml`, `reference`, `salaryMin`, `sa
 
 TODO_DEPLOYED: the seconds and cost of the empty form and of a keyword search at the default memory on the deployed build, with their run ids, and whether Workable's feed arrived whole there.
 
-How the time goes: a search by word, place, work type or job type is one download of Workable's feed, about 128 MB compressed and 860 MB of XML, read once for every word. From our laptop on 2026-11-02, Workable ended that answer about 63 seconds after the request on 10 of 11 downloads; when it is cut, the run uses the part that came and 120 seconds of career pages. An empty search reads the career pages of the 300 biggest companies on our list, 2 a second, and stops once 100 jobs posted today are held. Full details, a hybrid or onsite search and the companies you name ask Workable 2 calls a second.
+How the time goes: a search by word, place, work type or job type is one download of Workable's feed, about 128 MB compressed and 860 MB of XML, read once for every word. From our laptop on 2026-11-02 and 2026-11-03, Workable ended that answer about 63 seconds after the request on 14 of 15 downloads; when it is cut, the run uses the part that came and 120 seconds of career pages. An empty search reads the career pages of the 300 biggest companies on our list, 2 a second, about 150 seconds, and reads the feed instead when Workable refuses them before any answers. Full details, a hybrid or onsite search and the companies you name ask Workable 2 calls a second, at most 1,000 calls a run.
 
 ## Common questions
 
 ### How does it search every company without a list?
 
-Workable publishes one feed of "all job information for all our customers published on Jobs by Workable", updated every hour, as its help center says. A search by word, place, work type or job type reads that whole feed, so no list of companies is needed: on 329 hiring career pages checked on 2026-11-02, the feed held 99% of their open jobs. The companies you name, the empty form and job links read each company's own career page; for those the actor carries a list of 2,098 Workable accounts built from Common Crawl, the Wayback Machine and Workable's own feed. A company that is not on the list is still read when you paste its link.
+Workable publishes one feed of "all job information for all our customers published on Jobs by Workable", updated every hour, as its help center says. A search by word, place, work type or job type reads that feed, so no list of companies is needed: on 329 hiring career pages checked on 2026-11-02, the feed held 99% of their open jobs. The companies you name, the empty form and job links read each company's own career page; for those the actor carries a list of 2,196 Workable accounts built from Common Crawl, the Wayback Machine and Workable's own feed, each of which answered on its career page on 2026-11-02 or 2026-11-03. A company that is not on the list is still read when you paste its link.
 
 ### Which posting date does it use?
 
@@ -179,7 +179,7 @@ Only with full details on, and only when the company shows pay on the job: Worka
 
 ### Why did a run say Workable refused it?
 
-Workable's Cloudflare refuses an address that calls apply.workable.com too often, for up to a day (measured on 2026-11-02). The actor paces its calls at 2 a second, stops asking after 3 refused calls in a row and delivers the jobs it already read. Apify's addresses are shared with other users, so run again later.
+Workable's Cloudflare refuses an address that calls apply.workable.com too often, for up to a day (measured on 2026-11-02). The actor paces its calls at 2 a second and makes at most 1,000 in a run, and once Workable refuses it, it stops asking at once and delivers the jobs it already read. An empty search refused before any career page answers reads Workable's feed instead, which comes from www.workable.com. Apify's addresses are shared with other users, so run again later, or search by a word.
 
 ### Does it need a login or an API key?
 
@@ -210,18 +210,19 @@ It reads public job postings. You are responsible for how you use the data, incl
 
 ## Limitations
 
-- An empty search does not read every company: it reads the career pages of the 300 biggest companies on our list and stops once 100 jobs posted today are held. Type a word, a place, a work type or a job type to search every company.
+- An empty search does not read every company: it reads the career pages of the 300 biggest companies on our list, about 150 seconds. Type a word, a place, a work type or a job type to search every company.
 - Workable's feed holds only the jobs a company publishes on Workable's job board: 99% of the open jobs on the career pages checked.
-- When Workable cuts the feed download, the run keeps every job listed before the cut, reads 120 seconds of career pages for the rest, and its message says so. Run again later for every company.
+- Workable ends the feed's download about a minute after it starts. From our laptop on 2026-11-02 and 2026-11-03 that cut 14 of 15 downloads, and the furthest a cut download reached was the listings of 2026-10-22, so the newest 11 days of jobs or more were missing from the feed. The run then keeps every job listed before the cut, reads 120 seconds of the career pages with the most matching jobs for the newer ones, and its message names the cut date. Other companies' newest jobs are not in such a run.
 - Hybrid and onsite are checked job by job, so those searches return fewer jobs (see above).
+- Full details ask Workable once or twice per job, at most 1,000 times a run: about 650 jobs found by a word get details, and the rest come without them, at the Job price.
 - Pay comes only with full details, when the company shows it; jobs.workable.com links carry no pay.
 - About a fifth of jobs state no job type (19.9% on 2026-11-02), so a job type filter leaves them out.
 - The department and the company's job code come only from career pages or with full details: Workable's feed has neither.
-- The Workable account (`companySlug`) is known for 54.5% of the jobs found by a word; every row has the company's name and website.
+- The Workable account (`companySlug`) is known for 54.8% of the jobs found by a word; every job found by a word has the company's name and website.
 - On apply.workable.com a closed job and one that never existed answer the same, so both read as closed; jobs.workable.com links tell them apart.
 - A company that is not on our list is tried by its name in lower case with hyphens, which can miss: paste its link instead.
 - Workable can refuse an address for up to a day (see above).
-- The list of 2,098 accounts was built on 2026-11-02, and 991 of them were matched by their job codes and not yet checked on their career page.
+- The list of 2,196 accounts is partial: each answered on its career page on 2026-11-02 or 2026-11-03, but Workable banned our laptop before most candidate accounts were checked. A search by word, place, work type or job type does not depend on it.
 - Titles and descriptions come in the company's own language.
 
 ## Who maintains it?
@@ -249,4 +250,4 @@ Built and maintained by **Anshuman Atrey** ([@AnshumanAtrey](https://github.com/
 
 ## Last updated
 
-2026-11-02 (version 1.0)
+2026-11-03 (version 1.0)

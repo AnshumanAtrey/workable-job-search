@@ -20,7 +20,7 @@
             "title": "Where the job is (location)",
             "type": "array",
             "editor": "stringList",
-            "description": "Type where the jobs should be: a city, state, country or region, one per line, for example London, United States, EMEA or LatAm. US, USA and United States all work; a region finds its countries and the jobs posted for it. Worldwide finds the jobs open everywhere. Type Remote here to get remote jobs. Leave it empty for anywhere.",
+            "description": "Type where the jobs should be: a city, state, country or region, one per line, for example London, Texas, United States, EMEA or LatAm. US, USA and United States all work, a US, Canadian, Australian or Indian state works by name or code (Texas or TX), and a region finds the jobs in its countries. Workable gives every job a country, so no job is marked worldwide: type Remote here to get remote jobs. Leave it empty for anywhere.",
             "placeholderValue": "United States",
             "example": [
                 "United States"
@@ -80,7 +80,7 @@
             "type": "integer",
             "editor": "number",
             "unit": "jobs",
-            "description": "Type how many jobs to get, newest first: 100 by default. Type 0 to get every matching job. Each job is one charged row, so this also sets the most a run can cost.",
+            "description": "Type how many jobs to get, newest first: 100 by default. Type 0 to get every matching job. Each job is one charged row, so this and the $0.01 run start set the most a run can cost.",
             "prefill": 100,
             "example": 100,
             "default": 100,
@@ -91,7 +91,7 @@
             "title": "Full details (includeDetails)",
             "type": "boolean",
             "editor": "checkbox",
-            "description": "Tick to add the full details of each job: the description, requirements and benefits as text and HTML, the pay as numbers with its currency and period when the company shows it, remote, hybrid or onsite, the department, the company's job code and the place as city, region and country. Workable is asked about each job in turn, 2 calls a second. A job with details costs $3.50 per 1,000 instead of $2.50.",
+            "description": "Tick to add the full details of each job: the description, requirements and benefits as text and HTML, pay as numbers with its currency and period when shown, remote, hybrid or onsite, the department, the company's job code, city, region and country. Workable is asked about each job in turn, 2 calls a second, at most 1,000 times a run (about 650 jobs found by a word); jobs past that come without details at the Job price. A job with details costs $3.50 per 1,000 instead of $2.50.",
             "default": false,
             "nullable": true
         },
@@ -148,7 +148,7 @@
             "title": "Only these companies (companies)",
             "type": "array",
             "editor": "stringList",
-            "description": "Type company names to search only them, one per line: a name (Hugging Face), the account in the address (huggingface) or a Workable link (apply.workable.com/huggingface). Their career pages are read live. A company that is not on our list of 2,098 Workable accounts is tried by its name in lower case with hyphens, and its link always works. Leave it empty to search every company.",
+            "description": "Type company names to search only them, one per line: a name (Hugging Face), the account in the address (huggingface) or a Workable link (apply.workable.com/huggingface). Their career pages are read live. A company that is not on our list of 2,196 Workable accounts is tried by its name in lower case with hyphens, and its link always works. Leave it empty to search every company.",
             "placeholderValue": "Hugging Face",
             "example": [
                 "Hugging Face",
@@ -161,7 +161,7 @@
             "title": "Job links to check (jobUrls)",
             "type": "array",
             "editor": "stringList",
-            "description": "Paste Workable job links to check whether they are still open, one per line, instead of searching. Each link comes back open with the job, closed, or not found. apply.workable.com, old company.workable.com and jobs.workable.com links all work. On apply.workable.com a closed job and one that never existed answer the same, so both come back closed.",
+            "description": "Paste Workable job links to check whether they are still open, one per line, instead of searching. Each link comes back open with the job, closed, or not found. apply.workable.com, old company.workable.com and jobs.workable.com links all work. On apply.workable.com a closed job and one that never existed answer the same, so both come back closed. If none of the lines is a Workable job link, the run searches instead and charges for the jobs it finds.",
             "placeholderValue": "https://apply.workable.com/j/DC314E7FEE",
             "example": [
                 "https://apply.workable.com/j/DC314E7FEE"

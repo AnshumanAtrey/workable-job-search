@@ -2,7 +2,7 @@
     "actorSpecification": 1,
     "name": "workable-job-search",
     "title": "Workable Jobs Scraper & API - All Companies, Remote, 24 Hours",
-    "description": "Workable jobs scraper and API for every company on apply.workable.com and jobs.workable.com at once, searched by job title, location, remote, job type and date, newest first. Reads Workable's own hourly feed of 170,000+ listings live. The site:apply.workable.com dork done at the source.",
+    "description": "Workable jobs scraper and API for every company on apply.workable.com and jobs.workable.com at once, searched by job title, location, remote, job type and date, newest first. Rows come from Workable's own hourly feed of 170,000+ listings. The site:apply.workable.com dork done at the source.",
     "version": "1.0",
     "buildTag": "latest",
     "categories": [
@@ -48,7 +48,7 @@
                             "null"
                         ],
                         "title": "Main location (location)",
-                        "description": "The job's first place, as city, region and country the way Workable stores it.",
+                        "description": "The job's first place, as city, state or region, and country. A state Workable's feed writes as a code (TX) is given its name (Texas), as on the job page.",
                         "example": "London, England, United Kingdom"
                     },
                     "otherLocations": {
@@ -72,7 +72,7 @@
                             "null"
                         ],
                         "title": "Remote or onsite (workType)",
-                        "description": "remote, hybrid or onsite. Workable's job lists mark only remote jobs (a title or place that says Remote counts too); hybrid and onsite come from each job's own answer, with details on or in a hybrid or onsite search. Empty when Workable did not say.",
+                        "description": "remote, hybrid or onsite. Workable's job lists mark only remote jobs (a title or place that says Remote counts too, and a title that says Hybrid reads as hybrid); otherwise hybrid and onsite come from each job's own answer, with details on or in a hybrid or onsite search. Empty when Workable did not say.",
                         "example": "remote"
                     },
                     "employmentType": {
@@ -147,7 +147,7 @@
                             "null"
                         ],
                         "title": "Workable account (companySlug)",
-                        "description": "The company's Workable account, the name in its career page address, as in huggingface for apply.workable.com/huggingface. Always set for jobs read from a career page; for jobs from Workable's feed, set when the company's name is on our list once (54.5% of them on 2026-11-02).",
+                        "description": "The company's Workable account, the name in its career page address, as in huggingface for apply.workable.com/huggingface. Always set for jobs read from a career page; for jobs from Workable's feed, set when the company's name is on our list once (54.8% of them on 2026-11-03).",
                         "example": "starling-bank"
                     },
                     "companyWebsite": {
@@ -172,7 +172,7 @@
                         "type": "string",
                         "title": "Checked at (checkedAt)",
                         "description": "When the run read Workable, in UTC.",
-                        "example": "2026-11-02T20:39:14+00:00"
+                        "example": "2026-11-03T00:24:48+00:00"
                     },
                     "description": {
                         "type": [
@@ -331,7 +331,7 @@
                 },
                 "details": {
                     "title": "Details",
-                    "description": "The description, department, pay as numbers with its period, country and every other field of each job.",
+                    "description": "The description, department, pay as numbers with its period, the place, the company's job code and the links of each job.",
                     "transformation": {
                         "fields": [
                             "title",
@@ -345,6 +345,9 @@
                             "salaryCurrency",
                             "salaryPeriod",
                             "countryCode",
+                            "city",
+                            "region",
+                            "reference",
                             "otherLocations",
                             "applyUrl",
                             "companySlug",
@@ -398,6 +401,18 @@
                             },
                             "countryCode": {
                                 "label": "Country code (countryCode)",
+                                "format": "text"
+                            },
+                            "city": {
+                                "label": "Job city (city)",
+                                "format": "text"
+                            },
+                            "region": {
+                                "label": "Job region or state (region)",
+                                "format": "text"
+                            },
+                            "reference": {
+                                "label": "Company job code (reference)",
                                 "format": "text"
                             },
                             "otherLocations": {
