@@ -20,7 +20,7 @@
             "title": "Where the job is (location)",
             "type": "array",
             "editor": "stringList",
-            "description": "Type where the jobs should be: a city, state, country or region, one per line, for example London, Texas, United States, EMEA or LatAm. US, USA and United States all work, a US, Canadian, Australian or Indian state works by name or code (Texas or TX), and a region finds the jobs in its countries. Workable gives every job a country, so no job is marked worldwide: type Remote here to get remote jobs. Leave it empty for anywhere.",
+            "description": "Type where the jobs should be: a city, state, country or region, one per line, for example London, Texas, United States, EMEA or LatAm. US, USA and United States all work, a US, Canadian, Australian or Indian state works by name or code (Texas or TX), and a region finds the jobs in its countries. Workable gives every job a country, so no job is marked worldwide: type Remote alone to get remote jobs; next to other places it narrows nothing. Leave it empty for anywhere.",
             "placeholderValue": "United States",
             "example": [
                 "United States"
