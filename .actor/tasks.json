@@ -1,5 +1,5 @@
 {
-    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. Every search task but the Hugging Face one has a word, place, work type or job type, so it reads Workable's feed of every company; an empty search would read only the biggest career pages. The link check uses a jobs.workable.com link that was open on 2026-11-03 (one call to jobs.workable.com). options.memoryMbytes is store.json's default, 1024 MB: on Apify on 2026-11-03 a word search and the empty form each took about 2.5 minutes at 1 GB (runs 6uFK1C6wG1NyXXCyO and 7XF3iMyDlPMqHCzpz), and the whole feed arrived, so the last-24-hours task stays.",
+    "$comment": "Example tasks published on the Store by scripts/publish-tasks.mjs after every deploy (CI only). Each one is a search people type, with its own Google-indexed landing page and .md (manager/rules/SEO.md section 18). Limits: title 63, description 400, seoTitle 60, seoDescription 160 (154 kept), 10 per actor. inputSchemaFields must stay fields of the input schema, or the page stops showing after a build. Every search task but the Hugging Face one has a word, place, work type or job type, so it reads Workable's feed of every company; an empty search would read only the biggest career pages. The link check uses a jobs.workable.com link that was open on 2026-11-03 (one call to jobs.workable.com). options.memoryMbytes is store.json's default, 1024 MB: on Apify on 2026-11-03 a word search and the empty form each took about 2.5 minutes at 1 GB (runs 6uFK1C6wG1NyXXCyO and 7XF3iMyDlPMqHCzpz), and the whole feed arrived, so the last-24-hours task stays. Tasks marked publish false stay saved but off the Store: the account publishes at most 100 pages across all actors, so each actor keeps 2 or more by its earnings and search traffic (2026-11-11).",
     "options": {
         "build": "latest",
         "memoryMbytes": 1024,
@@ -8,6 +8,7 @@
     "tasks": [
         {
             "name": "remote-jobs-on-workable",
+            "publish": false,
             "title": "Find remote jobs at every company on Workable",
             "description": "Get the newest remote jobs from every company on Workable at once, with the company, every place, job type, posting date and link. Remote is what the company marked on Workable.",
             "input": {
@@ -39,6 +40,7 @@
         },
         {
             "name": "new-workable-jobs-us-last-24-hours",
+            "publish": false,
             "title": "Find new Workable jobs in the US from the last 24 hours",
             "description": "Get the newest jobs that companies on Workable listed in the United States in the last day, up to 100, with the company, place, job type and link. Schedule it daily for a fresh feed of US jobs.",
             "input": {
@@ -69,6 +71,7 @@
         },
         {
             "name": "software-engineer-jobs-workable",
+            "publish": false,
             "title": "Find software engineer jobs at every company on Workable",
             "description": "Search every company on Workable for software engineer jobs at once, newest first, with the company, every place, remote or not, job type, posting date and link.",
             "input": {
@@ -99,6 +102,7 @@
         },
         {
             "name": "nurse-jobs-usa-workable",
+            "publish": false,
             "title": "Find nurse jobs in the United States on Workable",
             "description": "Get the newest nurse jobs in the United States from every company on Workable at once, with the company, place, job type, posting date and link.",
             "input": {
@@ -131,6 +135,7 @@
         },
         {
             "name": "sales-jobs-europe-workable",
+            "publish": false,
             "title": "Find sales jobs in Europe on Workable",
             "description": "Get the newest sales and account executive jobs in Europe from every company on Workable, with the company, place, job type and link. Europe reads as its 51 countries.",
             "input": {
@@ -164,6 +169,7 @@
         },
         {
             "name": "internships-on-workable",
+            "publish": false,
             "title": "Find internships at every company on Workable",
             "description": "Get the newest internships from every company on Workable, with the company, place, remote or not, posting date and link. An internship is Workable's experience level Internship.",
             "input": {
@@ -195,6 +201,7 @@
         },
         {
             "name": "workable-jobs-with-pay-and-descriptions",
+            "publish": false,
             "title": "Get Workable data analyst jobs with descriptions, pay if shown",
             "description": "Get the newest data analyst jobs on Workable with full details: the description, requirements and benefits as text and HTML, pay as numbers with its period when the company shows it, department, job type and country.",
             "input": {
