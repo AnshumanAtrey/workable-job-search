@@ -4,6 +4,13 @@ Workable jobs scraper and API: search every company hiring on Workable (apply.wo
 
 Use it as a Workable API for every company's jobs, an apply.workable.com scraper, a jobs.workable.com scraper or a daily Workable job feed from the Apify Console, the Apify API, Python, JavaScript, n8n, Make or an AI agent, and export JSON, CSV or Excel. It is the `site:apply.workable.com` Google dork done at the source, with the fields a search result cannot give you. Available as an [Apify Actor](https://apify.com/anshumanatrey/workable-job-search). $0.0025 per job, $0.0035 with full details, $0.01 per run start, no login, no API key.
 
+**Use it from an AI assistant:**
+
+- **Claude** (claude.ai and the desktop app): [Add Workable Jobs to Claude](https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Workable%20Jobs&connectorUrl=https%3A%2F%2Fmcp.apify.com%3Ftools%3Danshumanatrey%2Fworkable-job-search), click Continue, sign in to Apify, Allow, and ask in plain words.
+- **Claude Code:** `claude mcp add --transport http workable-job-search "https://mcp.apify.com?tools=anshumanatrey/workable-job-search"`, then run `/mcp` to sign in to Apify.
+- **Codex:** `codex mcp add workable-job-search --url "https://mcp.apify.com?tools=anshumanatrey/workable-job-search"`, then `codex mcp login workable-job-search`.
+- **Any other MCP client:** `https://mcp.apify.com?tools=anshumanatrey/workable-job-search`, signed in with Apify or an `Authorization: Bearer <APIFY_TOKEN>` header.
+
 ## What does it do?
 
 - **Searches every company on Workable at once.** A word, a place, a work type or a job type reads Workable's own feed of every job its customers publish on its job board, which Workable updates every hour. Workable's job board counted 170,374 listings on 2026-11-02, one per job and place; the first three quarters of the feed alone held 79,763 open jobs at 4,792 companies in 181 countries, among them Rentokil Initial, Amartha, SAP Fioneer, Teleperformance Spain, Biffa, Foodics, Blueground and Hugging Face.
